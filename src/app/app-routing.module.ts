@@ -15,10 +15,18 @@ const routes: Routes = [{
   }]
   }, {
   path: 'login',
-  loadChildren: './login/login.module#LoginModule',
   data: {
     customLayout: true
-  }
+    }, children: [
+    {
+      path: 'auth',
+      loadChildren: './login/auth/auth.module#AuthModule'
+    },
+    {
+      path: 'register',
+      loadChildren: './login/register/register.module#RegisterModule'
+    }
+  ]
 }];
 
 @NgModule({
