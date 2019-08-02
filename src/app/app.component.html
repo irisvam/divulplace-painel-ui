@@ -5,8 +5,8 @@
 <ng-template #noCustomLayout>
   <mk-layout-wrapper>
     <mk-layout-header logoLink="/" [isSidebarRightToggle]="false">
-      <mk-layout-header-logo>Logo HTML</mk-layout-header-logo>
-      <mk-layout-header-logo-mini>Logo Mini HTML</mk-layout-header-logo-mini>
+      <mk-layout-header-logo><span class="divulplace-brand"></span></mk-layout-header-logo>
+      <mk-layout-header-logo-mini><span class="divulplace-brand-sgl"></span></mk-layout-header-logo-mini>
       <app-header-top></app-header-top>
     </mk-layout-header>
     <mk-layout-sidebar-left>
@@ -22,7 +22,23 @@
     </mk-layout-content>
     <mk-layout-footer>
       <mk-layout-footer-left>
-        <strong>Powered by <a href="#">Irisvam</a>.</strong>
+        <div class="text-center">
+            <ul class="list-inline social-buttons">
+                <li><a href="#"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li><a href="#"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                </li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a>
+                </li>
+                <li><a href="#"><i class="fa fa-youtube"></i></a>
+                </li>
+                <li><a href="#"><i class="fa fa-pinterest-p"></i></a>
+                </li>
+              </ul>
+        </div>
+        <strong>&copy; 2019 <a href="#">DivulPlace</a> Todos os direitos reservados.</strong>
       </mk-layout-footer-left>
       <mk-layout-footer-right>
         <b>Version</b> 1.0.0

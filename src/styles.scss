@@ -4,3 +4,60 @@
 @import '~ionicons/dist/css/ionicons.css';
 @import '~admin-lte-css/dist/css/AdminLTE.css';
 @import '~admin-lte-css/dist/css/skins/_all-skins.css';
+
+.login-box, 
+.register-box {
+    background-color: #3c8dbc;
+}
+
+.login-logo, 
+.register-logo {
+    background-color: #344869;
+}
+
+.sidebar-mini.sidebar-collapse .main-header .logo > .logo-mini {
+    background-color: #fff;
+    margin: 0px;
+}
+
+.main-header .logo {
+    padding: 0px;
+}
+
+span.divulplace-brand {
+    display: block;
+	width: 188px;
+	height: 56px;
+	background: url('assets/img/logos/divulplace_white.png') no-repeat;
+    background-size: 100%;
+}
+
+span.divulplace-brand-sgl {
+	display: block;
+	width: 48px;
+	height: 50px;
+	background: url('assets/img/logos/dp_transparente_pq.png') no-repeat;
+	background-size: 100%;
+	background-position: center;
+}
+
+ul.social-buttons li a {
+	display: block;
+	border: 1px solid #2a3a56;
+	color: #344869;
+	height: 40px;
+	width: 40px;
+	border-radius: 100%;
+	font-size: 20px;
+	line-height: 40px;
+	outline: none;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+  }
+  ul.social-buttons li a:hover,
+  ul.social-buttons li a:focus,
+  ul.social-buttons li a:active {
+	background-color: #344869;
+	color: #fff;
+  }

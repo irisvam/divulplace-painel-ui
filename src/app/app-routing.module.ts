@@ -7,24 +7,80 @@ const routes: Routes = [{
   path: '',
   data: {
     title: 'Início',
-    description: 'Bem vindo!',
-    breadcrumbs: 'Inicío'
+    description: 'Bem Vindo!'
   }, children: [{
     path: '',
     component: HomeComponent
-  }]
   }, {
+    path: 'painel',
+    loadChildren: () => import('./painel/painel.module').then(m => m.PainelModule),
+    data: {
+      title: 'Painel de Controle',
+      description: 'Encontre o que procure aqui!'
+    }
+  }, {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilModule),
+    data: {
+      title: 'Perfil',
+      description: 'Atualize suas informações pessoais!'
+    }
+  }, {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilModule),
+    data: {
+      title: 'Perfil',
+      description: 'Atualize suas informações pessoais!'
+    }
+  }, {
+    path: 'servicos',
+    data: {
+      title: 'Serviços',
+    },
+    children: [
+      {
+        path: 'portfolio',
+        loadChildren: () => import('./servicos/portfolio/portfolio.module').then(m => m.PortfolioModule),
+        data: {
+          title: 'Portfólio',
+          description: 'Divulgui-se!'
+        }
+      }, {
+        path: 'flyer',
+        loadChildren: () => import('./servicos/flyer/flyer.module').then(m => m.FlyerModule),
+        data: {
+          title: 'Folder/Flyer',
+          description: 'Panfletos para espalhar seu negócio!'
+        }
+      }, {
+        path: 'cartao',
+        loadChildren: () => import('./servicos/cartao/cartao.module').then(m => m.CartaoModule),
+        data: {
+          title: 'Cartão de Visitas',
+          description: 'Seja mais profissional com sua apresentação!'
+        }
+      }, {
+        path: 'video',
+        loadChildren:  () => import('./servicos/video/video.module').then(m => m.VideoModule),
+        data: {
+          title: 'Vídeos',
+          description: 'Conhecimento disponível!'
+        }
+      }
+    ]
+  }]
+}, {
   path: 'login',
   data: {
     customLayout: true
-    }, children: [
+  }, children: [
     {
       path: 'auth',
-      loadChildren: './login/auth/auth.module#AuthModule'
+      loadChildren: () => import('./login/auth/auth.module').then(m => m.AuthModule)
     },
     {
       path: 'register',
-      loadChildren: './login/register/register.module#RegisterModule'
+      loadChildren: () => import('./login/register/register.module').then(m => m.RegisterModule)
     }
   ]
 }];
