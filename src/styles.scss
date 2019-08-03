@@ -54,10 +54,65 @@ ul.social-buttons li a {
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	transition: all 0.3s;
-  }
-  ul.social-buttons li a:hover,
-  ul.social-buttons li a:focus,
-  ul.social-buttons li a:active {
+}
+ul.social-buttons li a:hover,
+ul.social-buttons li a:focus,
+ul.social-buttons li a:active {
 	background-color: #344869;
 	color: #fff;
-  }
+}
+
+@media (max-width: 991px) {
+	.breadcrumb {
+		position: relative!important;
+		margin-top: 5px!important;
+		top: 0!important;
+		right: 0!important;
+		float: none!important;
+		background: #d2d6de!important;
+		padding-left: 10px!important;
+	}
+	.breadcrumb li:before {
+		color: #97a0b3!important;
+	}
+}
+
+.sidebar-menu > li > a {
+    padding: 8px 5px 8px 15px;
+}
+
+.user-block:before,
+.user-block:after {
+  content: " ";
+  display: table;
+}
+.user-block:after {
+  clear: both;
+}
+.user-block img {
+  width: 40px;
+  height: 40px;
+  float: left;
+}
+.user-block .username,
+.user-block .description,
+.user-block .comment {
+  display: block;
+  margin-left: 50px;
+}
+.user-block .username {
+  font-size: 16px;
+  font-weight: 600;
+}
+.user-block .description {
+  color: #999;
+  font-size: 13px;
+}
+.user-block.user-block-sm .username,
+.user-block.user-block-sm .description,
+.user-block.user-block-sm .comment {
+  margin-left: 40px;
+}
+.user-block.user-block-sm .username {
+  font-size: 14px;
+}

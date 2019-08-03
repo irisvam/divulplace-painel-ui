@@ -3,15 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { BoxModule } from 'angular-admin-lte';
 
-import { VideoRoutingModule } from './video-routing.module';
-import { VideoComponent } from './video.component';
+import { ContaRoutingModule } from './conta-routing.module';
+import { ContaComponent } from './conta.component';
 
 @NgModule({
-  declarations: [VideoComponent],
+  declarations: [ContaComponent],
   imports: [
     CommonModule,
-    VideoRoutingModule,
+    ContaRoutingModule,
     BoxModule
   ]
 })
-export class VideoModule { }
+export class ContaModule { }

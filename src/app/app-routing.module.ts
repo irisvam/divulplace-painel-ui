@@ -68,6 +68,64 @@ const routes: Routes = [{
         }
       }
     ]
+  }, {
+    path: 'financeiro',
+    data: {
+      title: 'Financeiro',
+    },
+    children: [
+      {
+        path: 'mensalidade',
+        loadChildren: () => import('./financeiro/mensalidade/mensalidade.module').then(m => m.MensalidadeModule),
+        data: {
+          title: 'Mensalidade',
+          description: 'Fique em dia para não ficar de fora!'
+        }
+      }, {
+        path: 'promoter',
+        loadChildren: () => import('./financeiro/promoter/promoter.module').then(m => m.PromoterModule),
+        data: {
+          title: 'Promoter',
+          description: 'Monitore os seus rendimentos!'
+        }
+      }, {
+        path: 'conta',
+        loadChildren: () => import('./financeiro/conta/conta.module').then(m => m.ContaModule),
+        data: {
+          title: 'Contas Bancárias',
+          description: 'Cadastre suas contas para recebimentos!'
+        }
+      }
+    ]
+  }, {
+    path: 'correspondencia',
+    data: {
+      title: 'Correspondência',
+    },
+    children: [
+      {
+        path: 'mensagem',
+        loadChildren: () => import('./correspondencia/mensagem/mensagem.module').then(m => m.MensagemModule),
+        data: {
+          title: 'Mensagens',
+          description: 'Entre em contato com seus Afiliados!'
+        }
+      }, {
+        path: 'recado',
+        loadChildren: () => import('./correspondencia/recado/recado.module').then(m => m.RecadoModule),
+        data: {
+          title: 'Recados',
+          description: 'Recebendo informações dos usuários que viram seu Portfólio!'
+        }
+      }, {
+        path: 'aviso',
+        loadChildren: () => import('./correspondencia/aviso/aviso.module').then(m => m.AvisoModule),
+        data: {
+          title: 'Avisos',
+          description: 'Avisos importantes! Fique por dentro das novidades!'
+        }
+      }
+    ]
   }]
 }, {
   path: 'login',
