@@ -8,6 +8,7 @@ import { BoxModule, TabsModule, DropdownModule } from 'angular-admin-lte';
 import { HeaderTopComponent } from './header-top/header-top.component';
 import { SidebarLeftComponent } from './sidebar-left/sidebar-left.component';
 import { SidebarRightComponent } from './sidebar-right/sidebar-right.component';
+import { FooterBottomComponent } from './footer-bottom/footer-bottom.component';
 
 @NgModule({
   imports: [
@@ -16,13 +17,14 @@ import { SidebarRightComponent } from './sidebar-right/sidebar-right.component';
     HttpClientModule,
     DropdownModule,
     TabsModule,
-    BoxModule
+    BoxModule,
+    HttpClientModule
   ],
   declarations: [
-    SidebarLeftComponent, HeaderTopComponent, SidebarRightComponent
+    SidebarLeftComponent, HeaderTopComponent, SidebarRightComponent, FooterBottomComponent
   ],
   exports: [
-    BoxModule, TabsModule, SidebarLeftComponent, HeaderTopComponent, SidebarRightComponent
+    BoxModule, TabsModule, SidebarLeftComponent, HeaderTopComponent, SidebarRightComponent, FooterBottomComponent
   ]
 })
 export class DashboardModule { }

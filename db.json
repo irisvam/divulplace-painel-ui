@@ -1,0 +1,36 @@
+{
+    "posts": [
+      { "id": 1, "title": "json-server", "author": "typicode" }
+    ],
+    "comments": [
+      { "id": 1, "body": "some comment", "postId": 1 }
+    ],
+    "profile": { "name": "typicode" },
+    "usuarios" : [
+        { "id": 1, "nome": "Nome Usuário", "img": "assets/img/user.png", "email": "usuario@email.com" }
+    ],
+    "mensagens": [
+        { "id": 1, "msg": "Bem vindo meu amigo!", "afiliado" : { "id": 1, "nome": "Afiliado 01", "img": "assets/img/user.png"  }, "dhEnvio": 1288323623006 },
+        { "id": 2, "msg": "Você já subiu de grau!", "afiliado" : { "id": 2, "nome": "Afiliado 02", "img": "assets/img/user.png"  }, "dhEnvio": 1288323623006 },
+        { "id": 3, "msg": "Sou novo aqui você pode me ajudar!", "afiliado" : { "id": 3, "nome": "Afiliado 03", "img": "assets/img/user.png"  }, "dhEnvio": 1288323623006 },
+        { "id": 4, "msg": "Acabei de atualizar meu portfólio!", "afiliado" : { "id": 4, "nome": "Afiliado 04", "img": "assets/img/user.png"  }, "dhEnvio": 1288323623006 }
+    ],
+    "recados": [
+        { "id": 1, "msg": "Gostaria de saber quais...", "cliente" : { "id": 1, "nome": "Maria Gonzales"  }, "dhEnvio": 1288323623006 },
+        { "id": 2, "msg": "Qual é a margem de lucros...", "cliente" : { "id": 2, "nome": "Luna Stark" }, "dhEnvio": 1288323623006 },
+        { "id": 3, "msg": "Você poderia me ajudar", "cliente" : { "id": 3, "nome": "Nora Havishan" }, "dhEnvio": 1288323623006 },
+        { "id": 4, "msg": "Descobri que no final do... ", "cliente" : { "id": 4, "nome": "Filipe" }, "dhEnvio": 1288323623006 },
+        { "id": 5, "msg": "Qual é a margem de lucros...", "cliente" : { "id": 2, "nome": "Luna Stark" }, "dhEnvio": 1288323623006 },
+        { "id": 6, "msg": "Você poderia me ajudar", "cliente" : { "id": 3, "nome": "Nora Havishan" }, "dhEnvio": 1288323623006 },
+        { "id": 7, "msg": "Descobri que no final do... ", "cliente" : { "id": 4, "nome": "Filipe" }, "dhEnvio": 1288323623006 },
+        { "id": 8, "msg": "Você poderia me ajudar", "cliente" : { "id": 3, "nome": "Nora Havishan" }, "dhEnvio": 1288323623006 },
+        { "id": 9, "msg": "Descobri que no final do... ", "cliente" : { "id": 4, "nome": "Filipe" }, "dhEnvio": 1288323623006 }
+    ],
+    "novidades": [
+        { "id": 1, "usuario" : { "id": 1, "nome": "Jonathan Burke Jr.", "img": "assets/img/user.png", "nivel": "Promoter Gold" }, "dhInfo": 1288323623006, "info": "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at", "qtdeViews": 45, "modificacoes": [{ "tipo": "ALTERACAO", "titulo": "Description lists", "descricao": "A description list is perfect for defining terms", "img": "" },{ "tipo": "ALTERACAO", "titulo": "Euismod", "descricao": "Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit. Donec id elit non mi porta gravida at eget metus.", "img": "" }]},
+        { "id": 2, "usuario" : { "id": 2, "nome": "Gilbert Hill", "img": "assets/img/user.png", "nivel": "Promoter Trainee" }, "dhInfo": 1288323623006, "info": "", "qtdeViews": 15, "modificacoes": [{ "tipo": "ALTERACAO", "titulo": "Description lists", "descricao": "A description list is perfect for defining terms", "img": "" }]},
+        { "id": 3, "usuario" : { "id": 3, "nome": "Nora Jones", "img": "assets/img/user.png", "nivel": "Promoter Start" }, "dhInfo": 1288323623006, "info": "", "qtdeViews": 15, "modificacoes": [{ "tipo": "ALTERACAO", "titulo": "Lorem ipsum text generator", "descricao": "A description list is perfect for defining terms", "img": "" },{ "tipo": "INCLUSAO", "titulo": "Description lists", "descricao": "Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit. Donec id elit non mi porta gravida at eget metus.", "img": "assets/img/default-50x50.gif" }]},
+        { "id": 4, "usuario" : { "id": 4, "nome": "Alexander Kelv", "img": "assets/img/user.png", "nivel": "Promoter Diamond" }, "dhInfo": 1288323623006, "info": "", "qtdeViews": 10, "modificacoes": [{ "tipo": "ALTERACAO", "titulo": "Description lists", "descricao": "A description list is perfect for defining terms", "img": "" }]},
+        { "id": 5, "usuario" : { "id": 5, "nome": "Felicity Maia", "img": "assets/img/user.png", "nivel": "Promoter Start" }, "dhInfo": 1288323623006, "info": "", "qtdeViews": 15, "modificacoes": [{ "tipo": "ALTERACAO", "titulo": "Lorem ipsum text generator", "descricao": "A description list is perfect for defining terms", "img": "" },{ "tipo": "INCLUSAO", "titulo": "Description lists", "descricao": "Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit. Donec id elit non mi porta gravida at eget metus.", "img": "assets/img/default-50x50.gif" }]}
+    ]
+  }

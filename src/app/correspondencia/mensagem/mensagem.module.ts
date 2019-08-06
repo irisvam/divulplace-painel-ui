@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { BoxModule } from 'angular-admin-lte';
 
@@ -11,7 +12,8 @@ import { MensagemComponent } from './mensagem.component';
   imports: [
     CommonModule,
     MensagemRoutingModule,
-    BoxModule
+    BoxModule,
+    HttpClientModule
   ]
 })
 export class MensagemModule { }
