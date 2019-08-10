@@ -8,12 +8,11 @@ import { environment } from 'src/environments/environment';
 })
 export class NewsService {
 
-  private readonly API = `${environment.API}recados`;
+  private readonly API = `${environment.API}novidades`;
   
   constructor(private http: HttpClient) { }
-
   
   listar(){
-    return this.http.get<Recado[]>(this.API);
+    return this.http.get<Novidade[]>(this.API);
   }
 }

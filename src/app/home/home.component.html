@@ -1,26 +1,33 @@
 <div class="row">
       <div class="col-md-8">
-            <div class="box box-widget">
+            <div *ngFor="let novidade of novidades" class="box box-widget">
                   <div class="box-header with-border">
                         <div class="user-block">
-                              <img class="img-circle" src="../../assets/img/user.png" alt="User Image">
-                              <span class="description pull-right">23 Jan 7:30 PM Hoje</span>
-                              <span class="username"><a href="#">Jonathan Burke Jr.</a></span>
-                              <span class="description">Promoter Gold</span>
+                              <img class="img-circle" src="{{ novidade.usuario.img }}" alt="User Image">
+                              <span class="description pull-right">{{ novidade.dhInfo | date:"dd MMM yyyy hh:mm a" }}</span>
+                              <span class="username"><a href="#">{{ novidade.usuario.nome }}</a></span>
+                              <span class="description">{{ novidade.usuario.nivel }}</span>
                         </div>
                   </div>
                   <div class="box-body">
-                        <p>Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts. Separated they live in Bookmarksgrove right at</p>
+                        <p>{{ novidade.info }}</p>
                         <dl class="dl-horizontal">
-                              <dt>Description lists</dt>
-                                    <dd>A description list is perfect for defining terms.</dd>
-                              <dt>Euismod</dt>
-                                    <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
-                                    <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                              <ng-template ngFor let-modificacao [ngForOf]="novidade.modificacoes">
+                                    <dt>{{ modificacao.titulo }}</dt>
+                                    <dd *ngFor="let descricao of modificacao.descricoes">{{ descricao.acao }}</dd>
+                              </ng-template>
                         </dl>
-                        <span class="pull-right text-muted">45 visualizações</span>
+                        <div *ngFor="let inclusao of novidade.inclusoes" class="attachment-block clearfix">
+                              <img class="attachment-img" src="{{ inclusao.img }}" alt="Product Image">
+                              <div class="attachment-pushed">
+                                    <h4 class="attachment-heading"><a href="http://www.lipsum.com/">{{ inclusao.titulo }}</a></h4>
+                                    <div class="attachment-text">
+                                          {{ inclusao.descricao }} 
+                                          <a href="#">mais</a>
+                                    </div>
+                              </div>
+                        </div>
+                        <span class="pull-right text-muted">{{ novidade.qtdeViews }} visualizações</span>
                   </div>
             </div>
       </div>

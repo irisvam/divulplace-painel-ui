@@ -11,7 +11,14 @@ class Novidade {
     qtdeViews: number;
     modificacoes: [
         {
-        tipo: string;
+        titulo: string;
+        descricoes: [
+            { acao: string; }
+        ];
+        }
+    ];
+    inclusoes: [
+        {
         titulo: string;
         descricao: string;
         img: string;
