@@ -1,10 +1,11 @@
-class Mensagem {
+class MensagemAfiliado {
     id: number;
+    msg: string;
+    dhEnvio: Date;
+    afiliadoId: number;
     afiliado: {
         id: number;
         nome: string;
         img: string;
     };
-    msg: string;
-    dhEnvio: Date;
 }

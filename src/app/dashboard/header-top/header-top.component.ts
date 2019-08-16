@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'
 
 import { MensagemService } from 'src/app/correspondencia/service/mensagem.service';
 import { RecadoService } from 'src/app/correspondencia/service/recado.service';
@@ -11,10 +12,10 @@ import { AvisoService } from 'src/app/correspondencia/service/aviso.service';
 })
 export class HeaderTopComponent implements OnInit {
 
-  mensagens: Mensagem[];
+  mensagens: MensagemResumo[];
   qtdeMensagens: number;
 
-  recados: Recado[];
+  recados: RecadoResumo[];
   qtdeRecados: number;
 
   avisoResumos: AvisoResumo[];
@@ -23,7 +24,8 @@ export class HeaderTopComponent implements OnInit {
   constructor(
     private msgService: MensagemService,
     private rcdService: RecadoService,
-    private avsService: AvisoService
+    private avsService: AvisoService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -55,6 +57,46 @@ export class HeaderTopComponent implements OnInit {
         }
       });
     });
+  }
+
+
+  carregarMensagem(id: number) {
+    
+    if (id > 0) {
+
+      this.router.navigate(['correspondencia/mensagem',id]);
+
+    } else {
+
+      this.router.navigate(['correspondencia/mensagem']);
+    }
+  }
+  carregarRecado(id: number) {
+    
+    if (id > 0) {
+
+      this.router.navigate(['correspondencia/recado',id]);
+
+    } else {
+
+      this.router.navigate(['correspondencia/recado']);
+    }
+  }
+  carregarAviso(id: number) {
+    
+    if (id > 0) {
+
+      this.router.navigate(['correspondencia/aviso',id]);
+
+    } else {
+
+      this.router.navigate(['correspondencia/aviso']);
+    }
+  }
+
+  sair() {
+    
+    this.router.navigate(['login/auth']);
   }
 
 }

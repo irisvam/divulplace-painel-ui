@@ -14,15 +14,15 @@
           <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;">
             <ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
               <li *ngFor="let mensagem of mensagens">
-                <a href="#">
+                <a (click)="carregarMensagem(mensagem?.id)">
                   <div class="pull-left">
-                    <img src="{{ mensagem.afiliado.img }}" class="img-circle" alt="User Image">
+                    <img src="{{ mensagem?.afiliado?.img }}" class="img-circle" alt="User Image">
                   </div>
                   <h4>
-                    {{ mensagem.afiliado.nome }}
-                    <small><i class="fa fa-clock-o"></i> {{ mensagem.dhEnvio | date:"MM/dd/yyyy 'às' h:mma" }}</small>
+                    {{ mensagem?.afiliado?.nome }}
+                    <small><i class="fa fa-clock-o"></i> {{ mensagem?.dhEnvio | date:"MM/dd/yyyy 'às' h:mma" }}</small>
                   </h4>
-                  <p>{{ mensagem.msg }}</p>
+                  <p>{{ mensagem?.msg }}</p>
                 </a>
               </li>
             </ul>
@@ -30,7 +30,7 @@
             <div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div>
           </div>
         </li>
-        <li class="footer"><a href="#">Ver todas</a></li>
+        <li class="footer"><a (click)="carregarMensagem(0)">Ver todas</a></li>
       </mk-dropdown-menu>
     </li>
 
@@ -46,14 +46,14 @@
         <li>
           <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;">
             <ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
-              <li *ngFor="let recado of recados">
-                <a href="#">
+              <li *ngFor="let recado of recados; index as i">
+                <a (click)="carregarRecado(recado?.id)">
                   <div class="pull-left">
-                    01
+                    {{ i+1 }}
                   </div>
                   <h4>
-                    {{ recado.cliente.nome }}
-                    <small><i class="fa fa-clock-o"></i> {{ recado.dhEnvio | date:"MM/dd/yyyy 'às' h:mma" }}</small>
+                    {{ recado?.cliente?.nome }}
+                    <small><i class="fa fa-clock-o"></i> {{ recado?.dhEnvio | date:"MM/dd/yyyy 'às' h:mma" }}</small>
                   </h4>
                   <p>{{ recado.msg }}</p>
                 </a>
@@ -63,7 +63,7 @@
             </div><div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div>
           </div>
         </li>
-        <li class="footer"><a href="#">Ver todas</a></li>
+        <li class="footer"><a (click)="carregarRecado(0)">Ver todas</a></li>
       </mk-dropdown-menu>
     </li>
 
@@ -80,8 +80,8 @@
           <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;">
             <ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
               <li *ngFor="let resumo of avisoResumos">
-                <a href="#">
-                  <i class="fa {{ resumo.tpoClass }}"></i> {{ resumo.qtde }} {{ resumo.msg }}
+                <a (click)="carregarAviso(resumo?.id)">
+                  <i class="fa {{ resumo?.tpoClass }}"></i> {{ resumo?.qtde }} {{ resumo?.msg }}
                 </a>
               </li>
             </ul>
@@ -89,7 +89,7 @@
             <div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div>
           </div>
         </li>
-        <li class="footer"><a href="#">Ver todos</a></li>
+        <li class="footer"><a (click)="carregarAviso(0)">Ver todos</a></li>
       </mk-dropdown-menu>
     </li>
 
@@ -153,7 +153,7 @@
             <a routerLink="/login/auth" class="btn btn-default btn-flat">Portfólio</a>
           </div>
           <div class="pull-right">
-            <a routerLink="/login/auth" class="btn btn-default btn-flat">Sair</a>
+            <a class="btn btn-default btn-flat" (click)="sair()">Sair</a>
           </div>
         </li>
       </mk-dropdown-menu>

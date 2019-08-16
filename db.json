@@ -15,6 +15,26 @@
         { "id": 3, "msg": "Sou novo aqui você pode me ajudar!", "afiliado" : { "id": 3, "nome": "Afiliado 03", "img": "assets/img/user.png"  }, "dhEnvio": 1288323623006 },
         { "id": 4, "msg": "Acabei de atualizar meu portfólio!", "afiliado" : { "id": 4, "nome": "Afiliado 04", "img": "assets/img/user.png"  }, "dhEnvio": 1288323623006 }
     ],
+    "mensagens_qtde" : [
+        { "id": 1, "nome": "Jonathan Burke Jr.", "img": "assets/img/user.png", "nivel": "Promoter Star", "qtde": 3 },
+        { "id": 2, "nome": "Hilton Carlos", "img": "assets/img/user.png", "nivel": "Promoter Trainee", "qtde": 0 },
+        { "id": 3, "nome": "Amadeu Veiga", "img": "assets/img/user.png", "nivel": "Promoter Plus", "qtde": 1 },
+        { "id": 4, "nome": "Christophher Felix", "img": "assets/img/user.png", "nivel": "Promoter Gold", "qtde": 0 },
+        { "id": 5, "nome": "Amanda Jucker", "img": "assets/img/user.png", "nivel": "Promoter Star", "qtde": 0 },
+        { "id": 6, "nome": "Patricia Maia", "img": "assets/img/user.png", "nivel": "Promoter Diamond", "qtde": 2 },
+        { "id": 7, "nome": "Aldebaran Taurus", "img": "assets/img/user.png", "nivel": "Promoter Star", "qtde": 0 },
+        { "id": 8, "nome": "Feliciano Jorge", "img": "assets/img/user.png", "nivel": "Promoter Diamond", "qtde": 0 },
+        { "id": 9, "nome": "Carlos Fernando Veiga", "img": "assets/img/user.png", "nivel": "Promoter Star", "qtde": 0 }
+    ],
+    "mensagens_afiliado": [ 
+        { "id": 1, "msg": "Is this template really for free? That's unbelievable!", "dhEnvio": 1288323623006, "afiliadoId": 1 },
+        { "id": 2, "msg": "You better believe it!", "dhEnvio": 1288323623006, "afiliadoId": 0 },
+        { "id": 3, "msg": "Is this template really for free? That's unbelievable!", "dhEnvio": 1288323623006, "afiliadoId": 1 },
+        { "id": 4, "msg": "You better believe it!", "dhEnvio": 1288323623006, "afiliadoId": 0 },
+        { "id": 5, "msg": "Is this template really for free? That's unbelievable!", "dhEnvio": 1288323623006, "afiliadoId": 1 },
+        { "id": 6, "msg": "You better believe it!", "dhEnvio": 1288323623006, "afiliadoId": 0 },
+        { "id": 7, "msg": "Is this template really for free? That's unbelievable!", "dhEnvio": 1288323623006, "afiliadoId": 1 }
+    ],
     "recados": [
         { "id": 1, "msg": "Gostaria de saber quais...", "cliente" : { "id": 1, "nome": "Maria Gonzales"  }, "dhEnvio": 1288323623006 },
         { "id": 2, "msg": "Qual é a margem de lucros...", "cliente" : { "id": 2, "nome": "Luna Stark" }, "dhEnvio": 1288323623006 },
@@ -26,7 +46,7 @@
         { "id": 8, "msg": "Você poderia me ajudar", "cliente" : { "id": 3, "nome": "Nora Havishan" }, "dhEnvio": 1288323623006 },
         { "id": 9, "msg": "Descobri que no final do... ", "cliente" : { "id": 4, "nome": "Filipe" }, "dhEnvio": 1288323623006 }
     ],
-    "aviso_resumo": [
+    "avisos_resumo": [
         { "id": 1, "tipo": "AFILIADO_NOVO", "qtde": 2, "msg": "afiliados novos até o momento" },
         { "id": 2, "tipo": "AFILIADO_SAIU", "qtde": 2, "msg": "afiliados saíram até o momento" },
         { "id": 3, "tipo": "AFILIADO_PAGO", "qtde": 4, "msg": "afiliados pagaram até o momento" },

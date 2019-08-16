@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AvisoService {
 
-  private readonly API = `${environment.API}aviso_resumo`;
+  private readonly API = `${environment.API}avisos_resumo`;
 
   constructor(private http: HttpClient) { }
   

@@ -3,10 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { RecadoComponent } from './recado.component';
 
-const routes: Routes = [{
-  path: '',
-  component: RecadoComponent
-}];
+const routes: Routes = [
+  { path: '', component: RecadoComponent },
+  { path: ':id', component: RecadoComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

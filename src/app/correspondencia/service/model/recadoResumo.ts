@@ -1,4 +1,4 @@
-class Recado {
+class RecadoResumo {
     id: number;
     cliente: {
         id: number;

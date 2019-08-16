@@ -13,6 +13,14 @@ export class MensagemService {
   constructor(private http: HttpClient) { }
 
   listarRecentes(){
-    return this.http.get<Mensagem[]>(this.API);
+    return this.http.get<MensagemResumo[]>(this.API);
+  }
+
+  listarAfiliados(){
+    return this.http.get<MensagemQuantidade[]>(`${this.API}_qtde`);
+  }
+
+  listarMensagens() {
+    return this.http.get<MensagemAfiliado[]>(`${this.API}_afiliado`);
   }
 }

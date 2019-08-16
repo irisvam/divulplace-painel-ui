@@ -13,6 +13,6 @@ export class RecadoService {
   constructor(private http: HttpClient) { }
 
   listarRecentes(){
-    return this.http.get<Recado[]>(this.API);
+    return this.http.get<RecadoResumo[]>(this.API);
   }
 }
