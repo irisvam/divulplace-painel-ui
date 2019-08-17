@@ -16,20 +16,58 @@
                     </span>
                 </div>
             </mk-box-header>
-            <mk-box-content>HTML Box content</mk-box-content>
+            <mk-box-content class="box-chat">
+                <div class="direct-chat-messages">
+                    <ng-template ngFor let-cliente [ngForOf]="clientes">
+                        <div class="post no-padding">
+                            <div class="direct-chat-msg">
+                                <div class="pull-right">
+                                    <i class="fa" 
+                                        [ngClass]="{
+                                            'fa-check-circle-o text-yellow': cliente?.icLido,
+                                            'fa-circle-o text-green': !cliente?.icLido
+                                        }" ></i>
+                                </div>
+                                <span class="username"><a [routerLink]="['/correspondencia/recado', cliente?.id]">{{ cliente?.nome }}</a></span>
+                                <div class="time-recado">
+                                    <span class="text-muted pull-right"> {{ cliente?.dhEnvio | date:"dd MMM h:mm a" }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </mk-box-content>
         </mk-box>
     </div>
     <div class="col-md-8">
         <mk-box boxColor="warning" [isCollapsable]="false" [isRemovable]="false">
             <mk-box-header>Recados</mk-box-header>
             <mk-box-tools>
-                <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Previous"><i
-                        class="fa fa-chevron-left"></i></a>
-                <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Next"><i
-                        class="fa fa-chevron-right"></i></a>
+                <a class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Previous" 
+                    (click)="onProximo(-1)"
+                    [class.disabled]="indexCliente <= 0"
+                    >
+                        <i class="fa fa-chevron-left"></i></a>
+                <a class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Next" 
+                    (click)="onProximo(1)" 
+                    [class.disabled]="clientes.length - 1 <= indexCliente"
+                    >
+                    <i class="fa fa-chevron-right"></i></a>
             </mk-box-tools>
-            <mk-box-content>HTML Box content</mk-box-content>
-            <mk-box-footer>HTML Box Footer</mk-box-footer>
+            <mk-box-content>
+                <div class="mailbox-read-info">
+                    <h3>{{ recado?.nome }}</h3>
+                    <h5>De: {{ recado?.email }} </h5>
+                </div>
+                <div class="mailbox-read-message">
+                    {{ recado?.msg }}
+                </div>
+            </mk-box-content>
+            <mk-box-footer>
+                <div class="text-center">            
+                    <span class="text-muted"> {{ recado?.dhEnvio | date:"dd MMM h:mm a" }}</span>
+                </div>
+            </mk-box-footer>
         </mk-box>
     </div>
 </div>

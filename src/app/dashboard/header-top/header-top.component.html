@@ -80,7 +80,7 @@
           <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;">
             <ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
               <li *ngFor="let resumo of avisoResumos">
-                <a (click)="carregarAviso(resumo?.id)">
+                <a (click)="carregarAviso(0)">
                   <i class="fa {{ resumo?.tpoClass }}"></i> {{ resumo?.qtde }} {{ resumo?.msg }}
                 </a>
               </li>

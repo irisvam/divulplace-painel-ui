@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class MensagemService {
     return this.http.get<MensagemQuantidade[]>(`${this.API}_qtde`);
   }
 
-  listarMensagens() {
-    return this.http.get<MensagemAfiliado[]>(`${this.API}_afiliado`);
+  listarMensagens(id: number) {
+    return this.http.get<MensagemAfiliado[]>(`${this.API}_afiliado`).pipe(take(1));
   }
 }

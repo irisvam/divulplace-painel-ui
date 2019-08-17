@@ -22,12 +22,12 @@
                     <ng-template ngFor let-afiliado [ngForOf]="afiliados">
                         <div class="post no-padding">
                             <div class="user-block">
-                                <img class="img-circle" src="{{ afiliado.img }}" alt="User Image">
+                                <img class="img-circle" src="{{ afiliado?.img }}" alt="User Image">
                                 <div *ngIf="afiliado.qtde > 0" class="pull-right">
                                     <span data-toggle="tooltip" title="" class="badge bg-green" data-original-title="New Messages">{{ afiliado.qtde }}</span>
                                 </div>
-                                <span class="username"><a [routerLink]="['/correspondencia/mensagem', afiliado.id]">{{ afiliado.nome }}</a></span>
-                                <span class="description">{{ afiliado.nivel }}</span>
+                                <span class="username"><a [routerLink]="['/correspondencia/mensagem', afiliado?.id]">{{ afiliado.nome }}</a></span>
+                                <span class="description">{{ afiliado?.nivel }}</span>
                             </div>
                         </div>
                     </ng-template>
@@ -40,19 +40,19 @@
             <mk-box-header>Mensagens</mk-box-header>
             <mk-box-content class="box-chat direct-chat-primary">
                 <div class="direct-chat-messages">
-                        <ng-template ngFor let-mensagem [ngForOf]="mensagens">
-                            <div class="direct-chat-msg" [class.right]="mensagem.afiliado.id == 0" >
-                                <div class="direct-chat-info clearfix">
-                                    <span class="direct-chat-name pull-left">{{ mensagem.afiliado.nome }}</span>
-                                    <span class="direct-chat-timestamp pull-right">{{ mensagem?.dhEnvio | date:"dd MMM h:mma" }}</span>
-                                </div>
-                                <img class="direct-chat-img" src="{{ mensagem.afiliado.img }}" alt="Message User Image">
-                                <div class="direct-chat-text">
-                                    {{ mensagem.msg }}
-                                </div>
+                    <ng-template ngFor let-mensagem [ngForOf]="mensagens">
+                        <div class="direct-chat-msg" [class.right]="mensagem?.afiliado?.id == 0" >
+                            <div class="direct-chat-info clearfix">
+                                <span class="direct-chat-name pull-left">{{ mensagem?.afiliado?.nome }}</span>
+                                <span class="direct-chat-timestamp pull-right">{{ mensagem?.dhEnvio | date:"dd MMM h:mma" }}</span>
                             </div>
-                        </ng-template>
-                    </div>
+                            <img class="direct-chat-img" src="{{ mensagem?.afiliado?.img }}" alt="Message User Image">
+                            <div class="direct-chat-text">
+                                {{ mensagem?.msg }}
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
             </mk-box-content>
             <mk-box-footer>
                 <div class="input-group">

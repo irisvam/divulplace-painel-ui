@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import {  Subject, empty } from 'rxjs';
 
 import { MensagemService } from '../service/mensagem.service';
+import { takeUntil, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-mensagem',
@@ -15,7 +16,8 @@ export class MensagemComponent implements OnInit, OnDestroy {
   afiliados: MensagemQuantidade[];
   mensagens: MensagemAfiliado[];
   afiliadoId: number;
-  inscricaoMensagem: Subscription;
+  
+  unsub$ = new Subject();
 
   constructor(
     private msgService: MensagemService,
@@ -23,39 +25,47 @@ export class MensagemComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.msgService.listarAfiliados().subscribe(retorno => {
-      this.afiliados = retorno;
+    this.msgService.listarAfiliados()
+      .pipe(takeUntil(this.unsub$))
+      .subscribe(retorno => {
+        this.afiliados = retorno;
     });
 
-    this.inscricaoMensagem = this.router.params.subscribe(params => {
-      this.afiliadoId = params['id'];
-      if(params['id']){
-        this.msgService.listarMensagens().subscribe(retorno => {
-          this.mensagens = retorno;
-          console.log(retorno);
-          this.mensagens.forEach(element => {
-            if(element.afiliadoId == 0){
-              element.afiliado = {
-                id: 0 ,
-                nome: "Nome Usuário",
-                img: "assets/img/user.png"
-              }
-            } else {
-              element.afiliado = {
-                id: 1 ,
-                nome: "Outro Usuário",
-                img: "assets/img/user.png"
-              }
+    this.mensagens = null;
+    
+    this.router.params
+      .pipe(
+        map((params:any) => params['id']),
+        switchMap(id => {
+          if(id) {
+            return this.msgService.listarMensagens(id)
+          }
+          return empty();
+        }),
+        takeUntil(this.unsub$)
+      )
+      .subscribe(retorno => {
+        this.mensagens = retorno;
+        this.mensagens.forEach(element => {
+          if(element.afiliadoId == 0){
+            element.afiliado = {
+              id: 0 ,
+              nome: "Nome Usuário",
+              img: "assets/img/user.png"
             }
-          });
+          } else {
+            element.afiliado = {
+              id: 1 ,
+              nome: "Outro Usuário",
+              img: "assets/img/user.png"
+            }
+          }
         });
-      } else {
-        this.mensagens = null;
-      }
     });
   }
 
   ngOnDestroy() {
-    this.inscricaoMensagem.unsubscribe();
+    this.unsub$.next();
+    this.unsub$.complete();
   }
 }
