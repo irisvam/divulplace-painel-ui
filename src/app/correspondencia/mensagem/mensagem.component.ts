@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import {  Subject, empty } from 'rxjs';
+import { Subject, empty } from 'rxjs';
+import { takeUntil, map, switchMap } from 'rxjs/operators';
 
 import { MensagemService } from '../service/mensagem.service';
-import { takeUntil, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-mensagem',

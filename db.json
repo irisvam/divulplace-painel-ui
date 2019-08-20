@@ -93,6 +93,32 @@
         { "id": 4, "tipo": "ERRO_PAGMTO", "qtde": 1, "msg": "erro no seu pagamento" },
         { "id": 5, "tipo": "ATUAL_PERFIL", "qtde": 1, "msg": "atualização no seu perfil" }
     ],
+    "avisos": [
+        { "id": 1, "titulo": "Erro Pagamento", "dhEnvio": 1288323623006, "icLido": false, "resumo": "Pagamento não efetuado",
+            "msg": "Bom dia Sr. Afiliado. Informamos que até a presente data não foi constatado o pagamento do período correspondente. Devido ao grande número de cadastro novos o seu pagamento pode não ter sido computado até a presente data, caso tenha efetuado o pagamento na data prevista desconsidere esse comunicado, pois logo seu status será atualizado no nosso sistema. Atenciosamente. Equipe de apoio DivulPlace.            " },
+        { "id": 2, "titulo": "Afiliados Novos", "dhEnvio": 1288323623006, "icLido": true, "resumo": "Alfredo Novais se afiliou",
+            "msg": "Pagamento não efetuado" },
+        { "id": 3, "titulo": "Notícia Importante", "dhEnvio": 1288323623006, "icLido": true, "resumo": "Faça novos amigos...",
+            "msg": "Pagamento não efetuado" },
+        { "id": 4, "titulo": "Afiliados Inativos", "dhEnvio": 1288323623006, "icLido": false, "resumo": "Amanda Cristina tornou-se inativa",
+            "msg": "Pagamento não efetuado" },
+        { "id": 5, "titulo": "Pagamento Realizado", "dhEnvio": 1288323623006, "icLido": true, "resumo": "Carol Castro realizou pagamento.",
+            "msg": "Pagamento não efetuado" },
+        { "id": 6, "titulo": "Erro Pagamento", "dhEnvio": 1288323623006, "icLido": false, "resumo": "Pagamento não efetuado",
+            "msg": "Pagamento não efetuado" },
+        { "id": 2, "titulo": "Afiliados Novos", "dhEnvio": 1288323623006, "icLido": false, "resumo": "Ingrid Asc se afiliou",
+            "msg": "Pagamento não efetuado" },
+        { "id": 4, "titulo": "Afiliados Inativos", "dhEnvio": 1288323623006, "icLido": true, "resumo": "Roberto Morais tornou-se inativo",
+            "msg": "Pagamento não efetuado" },
+        { "id": 5, "titulo": "Pagamento Realizado", "dhEnvio": 1288323623006, "icLido": true, "resumo": "Ernaders Costa realizou pagamento.",
+            "msg": "Pagamento não efetuado" },
+        { "id": 5, "titulo": "Pagamento Realizado", "dhEnvio": 1288323623006, "icLido": true, "resumo": "Pacheco Nunes realizou pagamento.",
+            "msg": "Pagamento não efetuado" },
+        { "id": 5, "titulo": "Pagamento Realizado", "dhEnvio": 1288323623006, "icLido": false, "resumo": "Rebeca Beta realizou pagamento.",
+            "msg": "Pagamento não efetuado" },
+        { "id": 5, "titulo": "Perfil Atualizado", "dhEnvio": 1288323623006, "icLido": false, "resumo": "Houve modificações em seu perfil.",
+            "msg": "Pagamento não efetuado" }
+    ],
     "novidades": [
         { "id": 1, "usuario" : 
                         { "id": 1, "nome": "Jonathan Burke Jr.", "img": "assets/img/user.png", "nivel": "Promoter Gold" },

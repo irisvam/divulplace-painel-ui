@@ -6,3 +6,8 @@
 		display: block;
 	}
 }
+@media (min-width: 991px) {
+	.box-chat .direct-chat-messages {
+		height: auto;
+	}
+}

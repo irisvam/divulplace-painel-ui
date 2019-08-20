@@ -16,18 +16,59 @@
                     </span>
                 </div>
             </mk-box-header>
-            <mk-box-content>HTML Box content</mk-box-content>
+            <mk-box-content class="box-chat">
+                <div class="direct-chat-messages">
+                    <ng-template ngFor let-aviso [ngForOf]="avisos">
+                        <div class="post no-padding">
+                            <div class="direct-chat-msg">
+                                <div class="pull-right">
+                                    <i class="fa"
+                                        [ngClass]="{
+                                            'fa-check-circle-o text-green': aviso?.icLido,
+                                            'fa-circle-o text-red': !aviso?.icLido
+                                        }" ></i>
+                                </div>
+                                <span class="username"><a [routerLink]="['/correspondencia/aviso', aviso?.id]">{{ aviso?.titulo | uppercase }}</a></span>
+                                <div>
+                                    <span class="text-muted pull-right"> {{ aviso?.dhEnvio | date:"dd MMM h:mm a" }}</span>
+                                </div>
+                                <span class="description">{{ aviso?.resumo}}</span>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </mk-box-content>
         </mk-box>
     </div>
     <div class="col-md-8">
         <mk-box boxColor="danger" [isCollapsable]="false" [isRemovable]="false">
             <mk-box-header>Avisos</mk-box-header>
             <mk-box-tools>
-                <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Previous"><i class="fa fa-chevron-left"></i></a>
-                <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Next"><i class="fa fa-chevron-right"></i></a>
+                <a class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Previous"
+                    (click)="onProximo(-1)"
+                    [class.disabled]="indexAviso <= 0"
+                    >
+                    <i class="fa fa-chevron-left"></i></a>
+                <a class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Next"
+                    (click)="onProximo(1)"
+                    [class.disabled]="avisos.length - 1 <= indexAviso"
+                    >
+                    <i class="fa fa-chevron-right"></i></a>
             </mk-box-tools>
-            <mk-box-content>HTML Box content</mk-box-content>
-            <mk-box-footer>HTML Box Footer</mk-box-footer>
+            <mk-box-content>
+                <div class="mailbox-read-info">
+                    <h3 class="text-center">{{ aviso?.titulo }}</h3>
+                    <h5>{{ aviso?.resumo }} </h5>
+                </div>
+                <div class="mailbox-read-message">
+                    {{ aviso?.msg }}
+                </div>
+            </mk-box-content>
+            <mk-box-footer>
+                <div class="text-center">            
+                    <span class="text-muted"> {{ aviso?.dhEnvio | date:"dd MMM h:mm a" }}</span>
+                </div>
+            </mk-box-footer>
         </mk-box>
     </div>
 </div>
