@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "opcao": "SOLTEIRO",
+        "descricao": "Solteiro(a)"
+    },
+    {
+        "id": 2,
+        "opcao": "CASADO",
+        "descricao": "Casado(a)"
+    },
+    {
+        "id": 3,
+        "opcao": "DIVORCIADO",
+        "descricao": "Divorciado(a)"
+    },
+    {
+        "id": 4,
+        "opcao": "VIUVO",
+        "descricao": "Viúvo(a)"
+    },
+    {
+        "id": 5,
+        "opcao": "SEPARADO",
+        "descricao": "Separado(a)"
+    }
+]

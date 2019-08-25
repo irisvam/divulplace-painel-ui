@@ -1,0 +1,143 @@
+<form class="form-horizontal" [formGroup]="formPessoal" (ngSubmit)="onSubmit()" >
+    <div class="col-md-3 text-center">
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="form-group">
+                </div>
+                <div class="form-group">
+                    <img class="img-circle" src=" {{ imgUsuario }} " alt="Usuário">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="btn btn-default btn-file">
+                <i class="fa fa-picture-o"></i> Trocar Imagem
+                <input type="file" name="attachment">
+            </div>
+            <p class="help-block"></p>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-warning" (click)="openModal(tpltMudaSenha)">
+                <i class="fa fa-lock"></i>
+                Mudar Senha
+            </button>
+        </div>
+    </div>
+    <!-- /.col -->
+    <div class="col-md-9">
+        <div class="form-group">
+            <label for="outputId" class="col-sm-6 control-label">Seu ID:</label>
+            <div class="col-sm-4">
+                <label class="control-label">____________________________</label>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="verificarErroCss('tratamento')">
+            <label for="inputTratamento" class="col-sm-3 control-label">Tratamento</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="inputTratamento" placeholder="Sr., Sra., V.Exa, V.Maga, etc" formControlName="tratamento">
+                <app-form-feedback [show]="verificarTouched('tratamento')" [success]="verificarValidTouched('tratamento')"></app-form-feedback>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="verificarErroCss('nome')">
+            <label for="inputNome" class="col-sm-3 control-label">Nome</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="inputNome" placeholder="Nome" formControlName="nome">
+                <app-form-feedback [show]="verificarTouched('nome')" [success]="verificarValidTouched('nome')"></app-form-feedback>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputApelido" class="col-sm-3 control-label">Apelido</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="inputApelido" placeholder="Apelido" formControlName="apelido">
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="verificarErroCss('cpf')">
+            <label for="inputCpf" class="col-sm-3 control-label">CPF</label>
+            <div class="col-sm-4">
+                <input id="inputCpf" type="text" class="form-control" data-inputmask='"mask": "999.999.999-99"' data-mask formControlName="cpf" >
+                <app-form-feedback [show]="verificarTouched('cpf')" [success]="verificarValidTouched('cpf')"></app-form-feedback>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="verificarErroCss('dataNascimento')">
+            <label for="inputNascimento" class="col-sm-3 control-label">Data de Nascimento</label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar" (click)="dtNascimento.toggle()"></i>
+                    </div>
+                    <input type="text"
+                        class="form-control"
+                        placeholder="dd/MM/yyyy"
+                        #dtNascimento="bsDatepicker"
+                        bsDatepicker 
+                        formControlName="dataNascimento"
+                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-blue' }" >
+                    <app-form-feedback [show]="verificarTouched('dataNascimento')" [success]="verificarValidTouched('dataNascimento')"></app-form-feedback>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="selectCivil" class="col-sm-3 control-label">Estado Civil</label>
+            <div class="col-sm-6">
+                <select id="selectCivil" class="form-control" formControlName="estadoCivil">
+                    <option value="">Selecione...</option>
+                    <option *ngFor="let estadocivil of estadosCivis | async" [value]="estadocivil?.opcao">{{estadocivil?.descricao}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="radioSexo" class="col-sm-3 control-label">Sexo</label>
+            <div class="col-sm-9">
+                <label class="radio-inline" *ngFor="let opcaoSexo of opcaoMF">
+                    <input type="radio" name="sexo" class="minimal" [value]="opcaoSexo.opcao" formControlName="sexo">
+                    {{ opcaoSexo.descricao }}
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="areaSobre" class="col-sm-3 control-label">Sobre</label>
+            <div class="col-sm-6">
+                <textarea id="Sobre" class="form-control" rows="3" placeholder="Sobre ..." formControlName="sobre"></textarea>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="verificarErroCss('email')">
+            <label for="inputEmail" class="col-sm-3 control-label">E-mail</label>
+            <div class="col-sm-9">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    <input id="inputEmail" type="email" class="form-control" placeholder="E-mail" formControlName="email">
+                    <app-form-feedback [show]="verificarTouched('email')" [success]="verificarValidTouched('email')"></app-form-feedback>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="verificarErroCss('link')">
+            <label for="inputLink" class="col-sm-3 control-label">Link Social</label>
+            <div class="col-sm-9">
+                <div class="input-group">
+                    <span class="input-group-addon">http://www.divulplace.com/</span>
+                    <input id="inputLink" type="text" class="form-control" placeholder="link" formControlName="link">
+                    <app-form-feedback [show]="verificarTouched('link')" [success]="verificarValidTouched('link')"></app-form-feedback>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-9 col-md-offset-10 col-sm-3 col-md-2">
+                <button type="submit" class="btn btn-block btn-primary">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <app-form-debug [form]="formPessoal" ></app-form-debug>
+</form>
+
+<ng-template #tpltMudaSenha>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Mudança de Senha</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalMudaSenha.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        This is a modal.
+    </div>
+</ng-template>

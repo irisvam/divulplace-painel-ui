@@ -1,5 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { ptBrLocale } from 'ngx-bootstrap/locale';
+defineLocale('pt-br', ptBrLocale); 
 
 import { adminLteConf } from './admin-lte.conf';   //Import the layout configuration.
 
@@ -14,6 +19,7 @@ import { HomeComponent } from './home/home.component';   //Import the layout mod
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     DashboardModule,
     LayoutModule.forRoot(adminLteConf),   //Provide the configuration to the layout module.
@@ -24,6 +30,6 @@ import { HomeComponent } from './home/home.component';   //Import the layout mod
     HomeComponent
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

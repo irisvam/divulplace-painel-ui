@@ -1,0 +1,8 @@
+<div *ngIf="show">
+    <span class="glyphicon form-control-feedback" aria-hidden="true"
+        [ngClass]="{
+            'glyphicon-remove': !success,
+            'glyphicon-ok': success
+        }"></span>
+    <span class="sr-only">( {{ success ? 'success' : 'error' }} )</span>
+</div>

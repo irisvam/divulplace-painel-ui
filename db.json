@@ -7,7 +7,8 @@
     ],
     "profile": { "name": "typicode" },
     "usuarios" : [
-        { "id": 1, "nome": "Nome Usuário", "img": "assets/img/user.png", "email": "usuario@email.com" }
+        { "id": 1, "nome": "Nome Usuário", "img": "assets/img/user.png", "email": "usuario@email.com" },
+        { "id": 2, "nome": "Nome Usuário", "img": "assets/img/user.png", "email": "usuario@email.com" }
     ],
     "mensagens": [
         { "id": 1, "msg": "Bem vindo meu amigo!", "afiliado" : { "id": 1, "nome": "Afiliado 01", "img": "assets/img/user.png"  }, "dhEnvio": 1288323623006 },

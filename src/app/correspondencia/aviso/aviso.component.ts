@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AvisoComponent implements OnInit, OnDestroy {
 
-  avisos: AvisoSistema[];
+  avisos: AvisoSistema[] = [];
   aviso: AvisoSistema;
   indexAviso = -1;
   
