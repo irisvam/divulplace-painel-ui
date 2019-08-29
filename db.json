@@ -7,8 +7,36 @@
     ],
     "profile": { "name": "typicode" },
     "usuarios" : [
-        { "id": 1, "nome": "Nome Usuário", "img": "assets/img/user.png", "email": "usuario@email.com" },
-        { "id": 2, "nome": "Nome Usuário", "img": "assets/img/user.png", "email": "usuario@email.com" }
+        {
+            "id": 1,
+            "codigo": "2018ACDAKL8765",
+            "tratamento": "Sr.",
+            "img": "assets/img/user.png",
+            "nome": "Nome Usuário",
+            "apelido": "User2019",
+            "cpf": "12345678909",
+            "dataNascimento": "29-08-2019",
+            "estadoCivil": "CASADO",
+            "sexo": "M",
+            "sobre": "Conhecido",
+            "email": "usuario@email.com",
+            "link": "usuario2019novo"
+        },
+        {
+            "id": 2,
+            "codigo": "2018ACDAKL4569",
+            "tratamento": "Sr.",
+            "img": "assets/img/user.png",
+            "nome": "Nome Usuário",
+            "apelido": "User2019",
+            "cpf": "12345678909",
+            "dataNascimento": "29-08-2019",
+            "estadoCivil": "CASADO",
+            "sexo": "M",
+            "sobre": "Conhecido",
+            "email": "usuario@email.com",
+            "link": "usuario2019novo"
+        }
     ],
     "mensagens": [
         { "id": 1, "msg": "Bem vindo meu amigo!", "afiliado" : { "id": 1, "nome": "Afiliado 01", "img": "assets/img/user.png"  }, "dhEnvio": 1288323623006 },

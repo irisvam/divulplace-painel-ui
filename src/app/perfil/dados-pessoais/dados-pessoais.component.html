@@ -1,4 +1,4 @@
-<form class="form-horizontal" [formGroup]="formPessoal" (ngSubmit)="onSubmit()" >
+<form class="form-horizontal" [formGroup]="formulario" (ngSubmit)="onSubmit()" >
     <div class="col-md-3 text-center">
         <div class="form-group">
             <div class="col-md-12">
@@ -28,21 +28,21 @@
         <div class="form-group">
             <label for="outputId" class="col-sm-6 control-label">Seu ID:</label>
             <div class="col-sm-4">
-                <label class="control-label">____________________________</label>
+                <label class="control-label">{{ formulario.get('codigo').value }}</label>
             </div>
         </div>
         <div class="form-group" [ngClass]="verificarErroCss('tratamento')">
             <label for="inputTratamento" class="col-sm-3 control-label">Tratamento</label>
             <div class="col-sm-6">
                 <input type="text" class="form-control" id="inputTratamento" placeholder="Sr., Sra., V.Exa, V.Maga, etc" formControlName="tratamento">
-                <app-form-feedback [show]="verificarTouched('tratamento')" [success]="verificarValidTouched('tratamento')"></app-form-feedback>
+                <app-form-feedback [control]="formulario.get('tratamento')" label="Tratamento"></app-form-feedback>
             </div>
         </div>
         <div class="form-group" [ngClass]="verificarErroCss('nome')">
             <label for="inputNome" class="col-sm-3 control-label">Nome</label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" id="inputNome" placeholder="Nome" formControlName="nome">
-                <app-form-feedback [show]="verificarTouched('nome')" [success]="verificarValidTouched('nome')"></app-form-feedback>
+                <app-form-feedback [control]="formulario.get('nome')" label="Nome"></app-form-feedback>
             </div>
         </div>
         <div class="form-group">
@@ -55,7 +55,7 @@
             <label for="inputCpf" class="col-sm-3 control-label">CPF</label>
             <div class="col-sm-4">
                 <input id="inputCpf" type="text" class="form-control" data-inputmask='"mask": "999.999.999-99"' data-mask formControlName="cpf" >
-                <app-form-feedback [show]="verificarTouched('cpf')" [success]="verificarValidTouched('cpf')"></app-form-feedback>
+                <app-form-feedback [control]="formulario.get('cpf')" label="CPF"></app-form-feedback>
             </div>
         </div>
         <div class="form-group" [ngClass]="verificarErroCss('dataNascimento')">
@@ -71,9 +71,9 @@
                         #dtNascimento="bsDatepicker"
                         bsDatepicker 
                         formControlName="dataNascimento"
-                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-blue' }" >
-                    <app-form-feedback [show]="verificarTouched('dataNascimento')" [success]="verificarValidTouched('dataNascimento')"></app-form-feedback>
+                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-blue' }" >                    
                 </div>
+                <app-form-feedback [control]="formulario.get('dataNascimento')" label="Data de Nascimento"></app-form-feedback>
             </div>
         </div>
         <div class="form-group">
@@ -81,7 +81,7 @@
             <div class="col-sm-6">
                 <select id="selectCivil" class="form-control" formControlName="estadoCivil">
                     <option value="">Selecione...</option>
-                    <option *ngFor="let estadocivil of estadosCivis | async" [value]="estadocivil?.opcao">{{estadocivil?.descricao}}</option>
+                    <option *ngFor="let estadocivil of estadosCivis | async" [value]="estadocivil?.opcao">{{ estadocivil?.descricao }}</option>
                 </select>
             </div>
         </div>
@@ -106,8 +106,8 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                     <input id="inputEmail" type="email" class="form-control" placeholder="E-mail" formControlName="email">
-                    <app-form-feedback [show]="verificarTouched('email')" [success]="verificarValidTouched('email')"></app-form-feedback>
                 </div>
+                <app-form-feedback [control]="formulario.get('email')" label="E-mail"></app-form-feedback>
             </div>
         </div>
         <div class="form-group" [ngClass]="verificarErroCss('link')">
@@ -116,8 +116,8 @@
                 <div class="input-group">
                     <span class="input-group-addon">http://www.divulplace.com/</span>
                     <input id="inputLink" type="text" class="form-control" placeholder="link" formControlName="link">
-                    <app-form-feedback [show]="verificarTouched('link')" [success]="verificarValidTouched('link')"></app-form-feedback>
                 </div>
+                <app-form-feedback [control]="formulario.get('link')" label="Link Social"></app-form-feedback>
             </div>
         </div>
         <div class="form-group">
@@ -126,18 +126,8 @@
             </div>
         </div>
     </div>
-
-    <app-form-debug [form]="formPessoal" ></app-form-debug>
 </form>
 
 <ng-template #tpltMudaSenha>
-    <div class="modal-header">
-        <h4 class="modal-title pull-left">Mudança de Senha</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalMudaSenha.hide()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        This is a modal.
-    </div>
+    <app-mudar-senha [modal]="modalMudaSenha" ></app-mudar-senha>
 </ng-template>

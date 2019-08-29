@@ -1,8 +1,12 @@
-<div *ngIf="show">
+<div *ngIf="control.touched || control.dirty">
     <span class="glyphicon form-control-feedback" aria-hidden="true"
         [ngClass]="{
-            'glyphicon-remove': !success,
-            'glyphicon-ok': success
-        }"></span>
-    <span class="sr-only">( {{ success ? 'success' : 'error' }} )</span>
+            'glyphicon-remove': errorMessage,
+            'glyphicon-ok': !errorMessage
+        }"
+        ></span>
+    <span class="sr-only">( {{ errorMessage ? 'error' : 'success' }} )</span>
+    <div class="invalid-feedback" *ngIf="errorMessage">
+         {{ errorMessage }}
+    </div>
 </div>

@@ -1,0 +1,83 @@
+<form class="form-horizontal" [formGroup]="formulario" (ngSubmit)="onSubmit()" >
+    <div class="col-sm-12">
+        <div class="form-group" [ngClass]="verificarErroCss('pais')">
+            <label for="selectPais" class="col-sm-2 control-label">País</label>
+            <div class="col-sm-10">
+                <select id="selectPais" class="form-control" formControlName="pais">
+                    <option value="">Selecione...</option>
+                    <option *ngFor="let pais of paises | async" [value]="pais?.alpha3Code">{{ pais?.name }}</option>
+                </select>
+                <app-form-feedback [control]="formulario.get('pais')" label="País"></app-form-feedback>
+            </div>
+        </div>
+        
+        <div class="form-group" [ngClass]="verificarErroCss('cep')" *ngIf="icEnderecoBr">
+            <label for="inputCep" class="col-sm-2 control-label">CEP</label>
+            <div class="col-sm-4">
+                <input id="inputCep" type="text" class="form-control" formControlName="cep">
+                <app-form-feedback [control]="formulario.get('cep')" label="CEP"></app-form-feedback>
+            </div>
+        </div>
+
+        <div class="form-group" [ngClass]="verificarErroCss('endereco')">
+            <label for="inputEndereco" class="col-sm-2 control-label">Endereço</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputEndereco" placeholder="Endereço" formControlName="endereco">
+                <app-form-feedback [control]="formulario.get('endereco')" label="Endereço"></app-form-feedback>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="inputNumero" class="col-sm-2 control-label">Número</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="inputNumero" placeholder="Número" formControlName="numero">
+            </div>
+            <label for="inputComplemento" class="col-sm-3 control-label">Complemento</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="inputComplemento" placeholder="Complemento" formControlName="complemento">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="inputBairro" class="col-sm-2 control-label">Bairro</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputBairro" placeholder="Bairro" formControlName="bairro">
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="verificarErroCss('estado')" *ngIf="icEnderecoBr">
+            <label for="selectEstado" class="col-sm-2 control-label">Estado</label>
+            <div class="col-sm-10">
+                <select id="selectEstado" class="form-control" formControlName="estado">
+                    <option value="">Selecione...</option>
+                    <option *ngFor="let estado of estados" [value]="estado?.sigla">{{ estado?.nome }}</option>
+                </select>
+                <app-form-feedback [control]="formulario.get('estado')" label="Estado"></app-form-feedback>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="verificarErroCss('cidadeId')" *ngIf="icEnderecoBr">
+            <label for="selectCidade" class="col-sm-2 control-label">Cidade</label>
+            <div class="col-sm-10">
+                <select id="selectCidade" class="form-control" formControlName="cidadeId">
+                    <option value="">Selecione...</option>
+                    <option *ngFor="let cidade of cidades" [value]="cidade?.id">{{ cidade?.nome }}</option>
+                </select>
+                <app-form-feedback [control]="formulario.get('cidadeId')" label="Cidade"></app-form-feedback>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="verificarErroCss('cidade')" *ngIf="!icEnderecoBr">
+            <label for="inputCidade" class="col-sm-2 control-label">Cidade</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputCidade" placeholder="Cidade" formControlName="cidade">
+                <app-form-feedback [control]="formulario.get('cidade')" label="Cidade"></app-form-feedback>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-9 col-md-offset-9 col-sm-3 col-md-3">
+                <button type="submit" class="btn btn-block btn-primary">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <app-form-debug [form]="formulario" ></app-form-debug>
+</form>

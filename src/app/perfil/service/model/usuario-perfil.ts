@@ -1,5 +1,6 @@
 export interface UsuarioPerfil {
     id: number;
+    codigo: string,
     tratamento: string;
     img: string;
     nome: string;

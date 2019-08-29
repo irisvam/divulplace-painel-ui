@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,16 +11,16 @@ import { DropdownService } from 'src/app/shared/service/dropdown.service';
 
 import { EstadoCivil } from 'src/app/shared/model/estado-civil';
 import { UsuarioPerfil } from '../service/model/usuario-perfil';
+import { FormBasicComponent } from 'src/app/shared/form-basic/form-basic.component';
 
 @Component({
   selector: 'app-dados-pessoais',
   templateUrl: './dados-pessoais.component.html',
   styleUrls: ['./dados-pessoais.component.scss']
 })
-export class DadosPessoaisComponent implements OnInit, OnDestroy {
+export class DadosPessoaisComponent extends FormBasicComponent implements OnInit, OnDestroy {
 
   modalMudaSenha: BsModalRef;
-  formPessoal: FormGroup;
   imgUsuario = "/assets/img/user.png";
   opcaoMF: any[];
   estadosCivis: Observable<EstadoCivil[]>;
@@ -34,10 +34,16 @@ export class DadosPessoaisComponent implements OnInit, OnDestroy {
     private pflService: PerfilService,
     private ddwService: DropdownService
   ) {
+    super();
+    //CPF> Validators.pattern(/^(\d{3}\.){2}\d{3}\-\d{2}$/)]
+  }
 
-    this.formPessoal = this.formBuilder.group({
+  ngOnInit() {
+    this.localeService.use('pt-br');
+    this.formulario = this.formBuilder.group({
       id: [null],
-      tratamento: [null, Validators.required],
+      codigo: [''],
+      tratamento: [null, [Validators.required, Validators.minLength(3)]],
       img: [null],
       nome: [null, Validators.required],
       apelido: [null],
@@ -49,10 +55,6 @@ export class DadosPessoaisComponent implements OnInit, OnDestroy {
       email: [null, [Validators.required, Validators.email]],
       link: [null, Validators.required]
     });
-  }
-
-  ngOnInit() {
-    this.localeService.use('pt-br');
 
     this.estadosCivis = this.ddwService.getEstadoCivil();
     this.opcaoMF = this.ddwService.getOpcaoMF();
@@ -61,14 +63,14 @@ export class DadosPessoaisComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsub$))
       .subscribe(retorno => {
         this.inicializarFormPessoal(retorno);
-        this.imgUsuario = this.formPessoal.value['img'];
       });
   }
 
   inicializarFormPessoal(perfil: UsuarioPerfil) {
     if (perfil) {
-      this.formPessoal.patchValue({
+      this.formulario.patchValue({
         id: perfil.id,
+        codigo: perfil.codigo,
         tratamento: perfil.tratamento,
         img: perfil.img,
         nome: perfil.nome,
@@ -81,6 +83,7 @@ export class DadosPessoaisComponent implements OnInit, OnDestroy {
         email: perfil.email,
         link: perfil.link
       });
+      this.imgUsuario = this.formulario.value['img'];
     }
   }
 
@@ -88,57 +91,15 @@ export class DadosPessoaisComponent implements OnInit, OnDestroy {
     this.modalMudaSenha = this.modalService.show(tpltMudaSenha);
   }
 
-  onSubmit() {
-    if (this.formPessoal.valid) {
-      this.pflService.atualizarPerfil(this.formPessoal.value['id'], JSON.stringify(this.formPessoal.value))
-        .pipe(takeUntil(this.unsub$))
-        .subscribe(retorno => {
-          console.log(retorno);
-        },
-          (error: any) => {
-            console.log(error);
-          });
-    } else {
-      this.verificarValidacoes(this.formPessoal);
-    }
-  }
-
-  selecionarSexo(valor: string) {
-    this.formPessoal.get('sexo').setValue(valor);
-  }
-
-  selecionarEstadoCivil(valor: string) {
-    this.formPessoal.get('estadoCivil').setValue(valor);
-  }
-
-  verificarValidacoes(formFroup: FormGroup) {
-    Object.keys(formFroup.controls).forEach(element => {
-      const control = formFroup.get(element);
-      if (control instanceof FormGroup) {
-        this.verificarValidacoes(control);
-      }
-      control.markAsDirty();
-    });
-  }
-
-  verificarTouched(campo: string) {
-    return this.formPessoal.get(campo).touched || this.formPessoal.get(campo).dirty;
-  }
-
-  verificarValidTouched(campo: string) {
-    return this.formPessoal.get(campo).valid && this.verificarTouched(campo);
-  }
-
-  verificarInvalidTouched(campo: string) {
-    return !this.formPessoal.get(campo).valid && this.verificarTouched(campo);
-  }
-
-  verificarErroCss(campo: string) {
-    return {
-      'has-error': this.verificarInvalidTouched(campo),
-      'has-success': this.verificarValidTouched(campo),
-      'has-feedback': this.verificarTouched(campo),
-    }
+  submit() {
+    this.pflService.atualizarPerfil(this.formulario.value['id'], JSON.stringify(this.formulario.value))
+      .pipe(takeUntil(this.unsub$))
+      .subscribe(retorno => {
+        console.log(retorno);
+      },
+      (error: any) => {
+        console.log(error);
+      });
   }
 
   ngOnDestroy() {

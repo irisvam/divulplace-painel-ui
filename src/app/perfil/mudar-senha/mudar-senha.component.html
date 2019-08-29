@@ -1,0 +1,44 @@
+<form class="form-horizontal" [formGroup]="formulario" (ngSubmit)="onSubmit()" >
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Mudança de Senha</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group" [ngClass]="verificarErroCss('senha')">
+            <label for="inputSenha" class="col-sm-3 control-label">Senha</label>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <input type="password" class="form-control" id="inputSenha" placeholder="Senha Atual" formControlName="senha">
+                </div>
+                <app-form-feedback [control]="formulario.get('senha')" label="Senha"></app-form-feedback>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="verificarErroCss('novaSenha')">
+            <label for="inputNovaSenha" class="col-sm-3 control-label">Nova Senha</label>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <input type="password" class="form-control" id="inputNovaSenha" placeholder="Nova Senha" formControlName="novaSenha">
+                </div>
+                <app-form-feedback [control]="formulario.get('novaSenha')" label="Nova Senha"></app-form-feedback>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="verificarErroCss('confirmaSenha')">
+            <label for="inputConfirmaSenha" class="col-sm-3 control-label">Confirmar Senha</label>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <input type="password" class="form-control" id="inputConfirmaSenha" placeholder="Confirmar Senha" formControlName="confirmaSenha">
+                </div>
+                <app-form-feedback [control]="formulario.get('confirmaSenha')" label="Confirmar Senha"></app-form-feedback>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" (click)="modal.hide()">Fechar</button>
+        <button type="submit" class="btn btn-primary" >Confirmar Mudança</button>
+    </div>
+</form>

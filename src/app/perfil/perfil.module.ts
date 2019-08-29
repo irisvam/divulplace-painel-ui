@@ -13,9 +13,11 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { PerfilService } from './service/perfil.service';
+import { MudarSenhaComponent } from './mudar-senha/mudar-senha.component';
+import { EnderecoComponent } from './endereco/endereco.component';
 
 @NgModule({
-  declarations: [PerfilComponent, DadosPessoaisComponent],
+  declarations: [PerfilComponent, DadosPessoaisComponent, MudarSenhaComponent, EnderecoComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

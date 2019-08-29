@@ -10,6 +10,7 @@ export class AuthComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    document.body.style.backgroundColor = '#d2d6de';
   }
 
 }
