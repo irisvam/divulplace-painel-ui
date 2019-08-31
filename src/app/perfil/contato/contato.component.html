@@ -1,0 +1,119 @@
+<form class="form-horizontal" [formGroup]="formulario" (ngSubmit)="onSubmit()" >
+    <div class="col-sm-12">
+        <div class="form-group">
+            <label for="inputTelefone" class="col-sm-3 control-label">Telefone</label>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-phone"></i>
+                    </div>
+                    <input id="inputTelefone" type="text" class="form-control" mask="(00) 0000-0000" formControlName="telefone" >
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputCel1" class="col-sm-3 control-label">Celular 1</label>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-mobile"></i>
+                    </div>
+                    <input id="inputCel1" type="text" class="form-control" mask="(00) 00000-0000" formControlName="celular01" >
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label>
+                    <input type="checkbox" class="minimal" formControlName="celular01WS">
+                    WhatsApp
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputCel2" class="col-sm-3 control-label">Celular 2</label>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-mobile"></i>
+                    </div>
+                    <input id="inputCel2" type="text" class="form-control" mask="(00) 00000-0000" formControlName="celular02">
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label>
+                    <input type="checkbox" class="minimal" formControlName="celular02WS">
+                    WhatsApp
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputSkype" class="col-sm-3 control-label">Skype</label>
+            <div class="col-sm-9">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-skype"></i>
+                    </div>
+                    <input type="text" class="form-control" id="inputSkype" placeholder="Skype" formControlName="skype">
+                </div>
+            </div>
+        </div>
+
+        <fieldset>
+            <legend><h4>Sites/Redes Sociais</h4></legend>
+        </fieldset>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <div class="input-group-btn" dropdown>
+                        <button id="button-basic" dropdownToggle type="button" class="btn btn-info dropdown-toggle"
+                            aria-controls="dropdown-basic" title="{{ rdsSelecionado.nome }}">
+                            <span class="fa fa-{{ rdsSelecionado.icone }}" style="margin-right: 5px;"></span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                            <li role="menuitem" *ngFor="let redesocial of redesSociais | async" >
+                                <a class="dropdown-item" (click)="mudarRedeSocialIcone(redesocial)">
+                                    <span class="fa fa-{{ redesocial.icone }}"></span>{{ redesocial.nome }}
+                                </a>
+                            </li>
+                            <li class="divider dropdown-divider"></li>
+                            <li role="menuitem">
+                                <a class="dropdown-item" (click)="mudarRedeSocialIcone(rdsOutro)">
+                                    <span class="fa fa-{{ rdsOutro.icone }}"></span>{{ rdsOutro.nome }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <input type="text" class="form-control" #inputLinkSocial >
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-success btn-flat" title="{{ rdsBotao.nome }}" (click)="atualizarListaLinkSocial(inputLinkSocial)"><i class="fa fa-{{ rdsBotao.icone }}"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <ul class="todo-list">
+                    <li formArrayName="redesSociais" *ngFor="let link of formulario.get('redesSociais').controls; let i = index">
+                        <span class="handle">
+                            <i class="fa fa-ellipsis-v"></i>
+                            <i class="fa fa-ellipsis-v"></i>
+                        </span>
+                        <i class="fa fa-{{ link.controls.icone.value }} text-muted"></i>
+                        <span class="text">{{ link.controls.url.value }}</span>
+                        <div class="tools">
+                            <i class="fa fa-edit"></i>
+                            <i class="fa fa-trash-o"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-9 col-md-offset-9 col-sm-3 col-md-3">
+                    <button type="submit" class="btn btn-block btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

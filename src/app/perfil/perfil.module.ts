@@ -11,18 +11,30 @@ import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.componen
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
-import { PerfilService } from './service/perfil.service';
 import { MudarSenhaComponent } from './mudar-senha/mudar-senha.component';
 import { EnderecoComponent } from './endereco/endereco.component';
+import { ContatoComponent } from './contato/contato.component';
+
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
 @NgModule({
-  declarations: [PerfilComponent, DadosPessoaisComponent, MudarSenhaComponent, EnderecoComponent],
+  declarations: [
+    PerfilComponent, 
+    DadosPessoaisComponent, 
+    MudarSenhaComponent, 
+    EnderecoComponent, 
+    ContatoComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    NgxMaskModule.forRoot(options),
     PerfilRoutingModule,
     BoxModule,
     SharedModule

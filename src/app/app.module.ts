@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
-defineLocale('pt-br', ptBrLocale); 
+defineLocale('pt-br', ptBrLocale);
 
 import { adminLteConf } from './admin-lte.conf';   //Import the layout configuration.
 

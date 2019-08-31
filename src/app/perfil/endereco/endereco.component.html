@@ -14,7 +14,7 @@
         <div class="form-group" [ngClass]="verificarErroCss('cep')" *ngIf="icEnderecoBr">
             <label for="inputCep" class="col-sm-2 control-label">CEP</label>
             <div class="col-sm-4">
-                <input id="inputCep" type="text" class="form-control" formControlName="cep">
+                <input id="inputCep" type="text" class="form-control" mask="00000-000" formControlName="cep">
                 <app-form-feedback [control]="formulario.get('cep')" label="CEP"></app-form-feedback>
             </div>
         </div>
@@ -78,6 +78,4 @@
             </div>
         </div>
     </div>
-
-    <app-form-debug [form]="formulario" ></app-form-debug>
 </form>

@@ -1,0 +1,74 @@
+[
+    {
+        "icone": "github",
+        "nome": "GitHub"
+    },
+    {
+        "icone": "pinterest",
+        "nome": "Pinterest"
+    },
+    {
+        "icone": "vimeo",
+        "nome": "Vimeo"
+    },
+    {
+        "icone": "youtube",
+        "nome": "YouTube"
+    },
+    {
+        "icone": "linkedin-square",
+        "nome": "LinkedIn"
+    },
+    {
+        "icone": "twitter",
+        "nome": "Twitter"
+    },
+    {
+        "icone": "google-plus",
+        "nome": "Google+"
+    },
+    {
+        "icone": "tumblr",
+        "nome": "Tumblr"
+    },
+    {
+        "icone": "facebook-square",
+        "nome": "FaceBook"
+    },
+    {
+        "icone": "flickr",
+        "nome": "Flickr"
+    },
+    {
+        "icone": "dropbox",
+        "nome": "DropBox"
+    },
+    {
+        "icone": "digg",
+        "nome": "Digg"
+    },
+    {
+        "icone": "reddit",
+        "nome": "Reddit"
+    },
+    {
+        "icone": "stack-overflow",
+        "nome": "Stack Overflow"
+    },
+    {
+        "icone": "behance",
+        "nome": "Behance"
+    },
+    {
+        "icone": "dribbble",
+        "nome": "Dribble"
+    },
+    {
+        "icone": "instagram",
+        "nome": "Instagram"
+    },
+    {
+        "icone": "vk",
+        "nome": "VK"
+    }
+]

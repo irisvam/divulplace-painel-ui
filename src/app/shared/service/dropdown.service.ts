@@ -9,6 +9,7 @@ import { Paises } from '../model/paises';
 import { EnderecoViaCep } from '../model/endereco-viacep';
 import { CidadesBr } from '../model/cidades-br';
 import { empty } from 'rxjs';
+import { RedeSocial } from '../model/rede-social';
 
 @Injectable({
   providedIn: 'root'
@@ -56,5 +57,10 @@ export class DropdownService {
   /* https://viacep.com.br/ */
   getEnderecoBr(cep: string){
     return this.http.get<EnderecoViaCep>(`https://viacep.com.br/ws/${cep}/json/`).pipe(take(1));
+  }
+
+  /* https://viacep.com.br/ */
+  getRedeSocial(){
+    return this.http.get<RedeSocial[]>('assets/json/redesocial.json').pipe(take(1));
   }
 }

@@ -54,7 +54,7 @@
         <div class="form-group" [ngClass]="verificarErroCss('cpf')">
             <label for="inputCpf" class="col-sm-3 control-label">CPF</label>
             <div class="col-sm-4">
-                <input id="inputCpf" type="text" class="form-control" data-inputmask='"mask": "999.999.999-99"' data-mask formControlName="cpf" >
+                <input id="inputCpf" type="text" class="form-control" mask="000.000.000-00"formControlName="cpf" >
                 <app-form-feedback [control]="formulario.get('cpf')" label="CPF"></app-form-feedback>
             </div>
         </div>
