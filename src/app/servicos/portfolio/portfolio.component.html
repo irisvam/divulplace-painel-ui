@@ -1,79 +1,29 @@
 <div class="row">
     <div class="col-md-12 col-xs-12">
-        <mk-box boxColor="info" [isCollapsable]="false" [isRemovable]="false">
-            <mk-box-header>Dados Pessoais</mk-box-header>
-            <mk-box-tools>
-                <div class="btn-group">
-                    <div mk-dropdown class="btn-group" [isWrapper]="false">
-                        <mk-dropdown-toggle>
-                            <button #toggleElement type="button" class="btn btn-info btn-sm">
-                                <span class="fa fa-cogs"></span> Configurações
-                            </button>
-                        </mk-dropdown-toggle>
-                        <mk-dropdown-menu>
-                            <li><a href="#">Temas</a></li>
-                            <li><a href="#">Apresentações</a></li>
-                            <li><a href="#">Background</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Outros</a></li>
-                        </mk-dropdown-menu>
-                    </div>
-                </div>
-            </mk-box-tools>
-            <mk-box-content>HTML Box content</mk-box-content>
-            <mk-box-footer>HTML Box footer</mk-box-footer>
-        </mk-box>
+        <app-pessoal-info></app-pessoal-info>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-12 col-xs-12">
-        <mk-box boxColor="info" [isCollapsable]="true" [isRemovable]="false">
-            <mk-box-header>Serviços <small>Serviços do qual é Consultor</small></mk-box-header>
-            <mk-box-tools>
-                <button class="btn btn-info btn-sm"><i class="fa fa-file-o"></i> Novo</button>
-            </mk-box-tools>
-            <mk-box-content>HTML Box content</mk-box-content>
-            <mk-box-footer>HTML Box footer</mk-box-footer>
-        </mk-box>
+        <app-consultor></app-consultor>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-12 col-xs-12">
-        <mk-box boxColor="info" [isCollapsable]="true" [isRemovable]="false">
-            <mk-box-header>Produtos <small>Itens que você quer divulgar</small></mk-box-header>
-            <mk-box-tools>
-                <button class="btn btn-info btn-sm"><i class="fa fa-file-o"></i> Novo</button>
-            </mk-box-tools>
-            <mk-box-content>HTML Box content</mk-box-content>
-            <mk-box-footer>HTML Box footer</mk-box-footer>
-        </mk-box>
+        <app-produto></app-produto>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-12 col-xs-12">
-        <mk-box boxColor="info" [isCollapsable]="true" [isRemovable]="false">
-            <mk-box-header>Outros <small>Produtos e Serviços que você também deseja divulgar</small></mk-box-header>
-            <mk-box-tools>
-                <button class="btn btn-info btn-sm"><i class="fa fa-file-o"></i> Novo</button>
-            </mk-box-tools>
-            <mk-box-content>HTML Box content</mk-box-content>
-            <mk-box-footer>HTML Box footer</mk-box-footer>
-        </mk-box>
+        <app-diversos></app-diversos>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-12 col-xs-12">
-        <mk-box boxColor="info" [isCollapsable]="true" [isRemovable]="false">
-            <mk-box-header>Empresas <small>Suas empresas</small></mk-box-header>
-            <mk-box-tools>
-                <button class="btn btn-info btn-sm"><i class="fa fa-file-o"></i> Novo</button>
-            </mk-box-tools>
-            <mk-box-content>HTML Box content</mk-box-content>
-            <mk-box-footer>HTML Box footer</mk-box-footer>
-        </mk-box>
+        <app-empresa></app-empresa>
     </div>
 </div>

@@ -4,16 +4,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { BoxModule } from 'angular-admin-lte';
 
-import { SharedModule } from '../shared/shared.module';
 import { PerfilRoutingModule } from './perfil-routing.module';
-import { PerfilComponent } from './perfil.component';
-import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
+import { SharedModule } from '../shared/shared.module';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 
+import { PerfilComponent } from './perfil.component';
+import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
 import { MudarSenhaComponent } from './mudar-senha/mudar-senha.component';
 import { EnderecoComponent } from './endereco/endereco.component';
 import { ContatoComponent } from './contato/contato.component';

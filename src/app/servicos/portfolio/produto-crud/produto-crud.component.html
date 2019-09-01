@@ -1,0 +1,60 @@
+<form class="form-horizontal" [formGroup]="formulario" (ngSubmit)="onSubmit()" >
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Produto</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <div class="form-group" style="margin-bottom: 0px;">
+                    <div class="col-xs-6">
+                        <img class="img-responsive" src="assets/img/250x250.png">
+                        <br/>
+                    </div>
+                    <div class="col-xs-3">
+                        <img class="img-responsive" src="assets/img/250x250.png">
+                        <br/>
+                    </div>
+                    <div class="col-xs-3">
+                        <img class="img-responsive" src="assets/img/250x250.png">
+                        <br/>
+                    </div>
+                    <div class="col-xs-3">
+                        <img class="img-responsive" src="assets/img/250x250.png">
+                        <br/>
+                    </div>
+                    <div class="col-xs-3">
+                        <img class="img-responsive" src="assets/img/250x250.png">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="btn btn-default btn-file">
+                        <i class="fa fa-picture-o"></i> Adicionar Imagens
+                        <input type="file" name="attachment">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group" [ngClass]="verificarErroCss('nomeProduto')">
+                    <label for="inputProduto" class="col-sm-2 control-label">Produto</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputProduto" placeholder="Nome do Produto" formControlName="nomeProduto">
+                        <app-form-feedback [control]="formulario.get('nomeProduto')" label="Nome da Produto"></app-form-feedback>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputLinkProduto" class="col-sm-2 control-label">Link</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputLinkProduto" placeholder="Link Principal de Divulgação" formControlName="urlProduto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" (click)="modal.hide()">Fechar</button>
+        <button type="submit" class="btn btn-primary" >Adicionar</button>
+    </div>
+</form>

@@ -1,22 +1,27 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { DropdownService } from 'src/app/shared/service/dropdown.service';
-import { Observable, empty, Subject } from 'rxjs';
-import { map, switchMap, takeUntil, tap, distinctUntilChanged } from 'rxjs/operators';
+import { Observable, Subject, empty } from 'rxjs';
 
-import { EstadosBr } from 'src/app/shared/model/estados-br';
-import { Paises } from 'src/app/shared/model/paises';
-import { CidadesBr } from 'src/app/shared/model/cidades-br';
-import { EnderecoViaCep } from 'src/app/shared/model/endereco-viacep';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+
+import { DropdownService } from 'src/app/shared/service/dropdown.service';
+
 import { FormBasicComponent } from 'src/app/shared/form-basic/form-basic.component';
+import { Paises } from 'src/app/shared/model/paises';
+import { EstadosBr } from 'src/app/shared/model/estados-br';
+import { CidadesBr } from 'src/app/shared/model/cidades-br';
+import { tap, switchMap, map, takeUntil, distinctUntilChanged } from 'rxjs/operators';
+import { EnderecoViaCep } from 'src/app/shared/model/endereco-viacep';
 
 @Component({
-  selector: 'app-endereco',
-  templateUrl: './endereco.component.html',
-  styleUrls: ['./endereco.component.scss']
+  selector: 'app-empresa-contato',
+  templateUrl: './empresa-contato.component.html',
+  styleUrls: ['./empresa-contato.component.scss']
 })
-export class EnderecoComponent extends FormBasicComponent implements OnInit, OnDestroy {
+export class EmpresaContatoComponent extends FormBasicComponent implements OnInit {
+
+  @Input() modal: BsModalRef;
 
   paises: Observable<Paises[]>;
   estados: EstadosBr[];
@@ -28,7 +33,7 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
   constructor(
     private formBuilder: FormBuilder,
     private ddwService: DropdownService
-  ) {
+  ) { 
     super();
   }
 
@@ -43,7 +48,13 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
       bairro: [null],
       estado: ['', Validators.required],
       cidadeId: ['', Validators.required],
-      cidade: ['', Validators.required]
+      cidade: ['', Validators.required],
+      telefone: [null],
+      celular01: [null],
+      celular01WS: [false],
+      celular02: [null],
+      celular02WS: [false],
+      email: [null, Validators.email],
     });
 
     this.paises = this.ddwService.getPaises();
@@ -97,6 +108,7 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
   }
 
   submit() {
+    this.modal.hide();
   }
 
   ngOnDestroy() {

@@ -1,0 +1,13 @@
+<mk-box boxColor="info" [isCollapsable]="true" [isRemovable]="false">
+    <mk-box-header>Empresas <small>Suas empresas</small></mk-box-header>
+    <mk-box-tools>
+        <button class="btn btn-info btn-sm" (click)="openModal(tpltEmpresa)" style="margin-right: 5px;">
+            <i class="fa fa-file-o"></i> Novo
+        </button>
+    </mk-box-tools>
+    <mk-box-content>HTML Box content</mk-box-content>
+</mk-box>
+
+<ng-template #tpltEmpresa>
+    <app-empresa-crud [modal]="modalEmpresa"></app-empresa-crud>
+</ng-template>

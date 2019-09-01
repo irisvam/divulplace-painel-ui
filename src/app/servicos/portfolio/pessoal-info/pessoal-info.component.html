@@ -1,0 +1,23 @@
+<mk-box boxColor="info" [isCollapsable]="false" [isRemovable]="false">
+    <mk-box-header>Dados Pessoais</mk-box-header>
+    <mk-box-tools>
+        <div class="btn-group">
+            <div mk-dropdown class="btn-group" [isWrapper]="false">
+                <mk-dropdown-toggle>
+                    <button #toggleElement type="button" class="btn btn-info btn-sm">
+                        <span class="fa fa-cogs"></span> Configurações
+                    </button>
+                </mk-dropdown-toggle>
+                <mk-dropdown-menu>
+                    <li><a href="#">Temas</a></li>
+                    <li><a href="#">Apresentações</a></li>
+                    <li><a href="#">Background</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Outros</a></li>
+                </mk-dropdown-menu>
+            </div>
+        </div>
+    </mk-box-tools>
+    <mk-box-content>HTML Box content</mk-box-content>
+    <mk-box-footer>HTML Box footer</mk-box-footer>
+</mk-box>
