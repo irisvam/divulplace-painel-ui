@@ -38,6 +38,32 @@
             "link": "usuario2019novo"
         }
     ],
+    "endereco" : [
+        {
+            "id": 1,
+            "pais": "BRA",
+            "cep": "02450000",
+            "logradouro": "Alameda Afonso Schmidt",
+            "numero": 25,
+            "complemento": "Bloco A",
+            "bairro": "Santa Teresinha",
+            "estado": "SP",
+            "cidadeId": 3550308,
+            "cidade": "São Paulo"
+        },
+        {
+            "id": 2,
+            "pais": "CAN",
+            "cep": "",
+            "logradouro": "Willingdon Ave",
+            "numero": 4200,
+            "complemento": "BC V5G 4J3",
+            "bairro": "Burnaby",
+            "estado": "",
+            "cidadeId": 0,
+            "cidade": "Vancouver"
+        }
+    ],
     "mensagens": [
         { "id": 1, "msg": "Bem vindo meu amigo!", "afiliado" : { "id": 1, "nome": "Afiliado 01", "img": "assets/img/user.png"  }, "dhEnvio": 1288323623006 },
         { "id": 2, "msg": "Você já subiu de grau!", "afiliado" : { "id": 2, "nome": "Afiliado 02", "img": "assets/img/user.png"  }, "dhEnvio": 1288323623006 },

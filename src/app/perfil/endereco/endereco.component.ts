@@ -4,7 +4,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { DropdownService } from 'src/app/shared/service/dropdown.service';
 import { Observable, empty, Subject } from 'rxjs';
 import { map, switchMap, takeUntil, tap, distinctUntilChanged } from 'rxjs/operators';
+import { EnderecoService } from '../service/endereco.service';
 
+import { UsuarioEndereco } from '../service/model/usuario-endereco';
 import { EstadosBr } from 'src/app/shared/model/estados-br';
 import { Paises } from 'src/app/shared/model/paises';
 import { CidadesBr } from 'src/app/shared/model/cidades-br';
@@ -27,7 +29,8 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
 
   constructor(
     private formBuilder: FormBuilder,
-    private ddwService: DropdownService
+    private ddwService: DropdownService,
+    private endService: EnderecoService,
   ) {
     super();
   }
@@ -65,7 +68,13 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
     this.formulario.get('estado').valueChanges
       .pipe(
         map(uf => uf ? uf : empty()),
-        switchMap((uf: string) => this.ddwService.getCidadesBr(uf)),
+        switchMap(uf => {
+          this.formulario.get('cidadeId').setValue('');
+          if (uf !== '') {
+            return this.ddwService.getCidadesBr(uf);
+          }
+          return empty();
+          }),
         takeUntil(this.unsub$)
       )
       .subscribe(cidades => this.cidades = cidades);
@@ -77,6 +86,29 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
         takeUntil(this.unsub$)
       )
       .subscribe(retorno => retorno.cep ? this.atualizarEndereco(retorno) : {});
+
+    this.endService.recuperarEndereco(2)
+    .pipe(takeUntil(this.unsub$))
+    .subscribe(retorno => {
+      this.inicializarFormEndereco(retorno);
+    });
+  }
+
+  inicializarFormEndereco(endereco: UsuarioEndereco) {
+    if (endereco) {
+      this.formulario.patchValue({
+        id: endereco.id,
+        pais: endereco.pais,
+        cep: endereco.cep,
+        endereco: endereco.logradouro,
+        numero: endereco.numero,
+        complemento: endereco.complemento,
+        bairro: endereco.bairro,
+        estado: endereco.estado,
+        cidadeId: endereco.cidadeId,
+        cidade: endereco.cidade
+      });
+    }
   }
 
   atualizarEndereco(endereco: EnderecoViaCep){
@@ -94,6 +126,7 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
     this.cidades = null
     this.formulario.get('estado').setValue('');
     this.formulario.get('cidadeId').setValue('');
+    this.formulario.get('cidade').setValue('');
   }
 
   submit() {
