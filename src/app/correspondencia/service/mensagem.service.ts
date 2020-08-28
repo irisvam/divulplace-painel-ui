@@ -5,6 +5,10 @@ import { take } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 
+import { MensagemResumo } from './model/mensagemResumo';
+import { MensagemAfiliado } from './model/mensagemAfiliado';
+import { MensagemQuantidade } from './model/mensagemQuantidade';
+
 @Injectable({
   providedIn: 'root'
 })

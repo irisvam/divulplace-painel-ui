@@ -1,4 +1,4 @@
-class Novidade {
+export interface Novidade {
     id: number;
     afiliado: {
         id: number;

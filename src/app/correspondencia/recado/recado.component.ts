@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, empty } from 'rxjs';
 import { takeUntil, map, switchMap } from 'rxjs/operators';
 
+import { RecadoRecebido } from '../service/model/recadoRecebido';
+import { RecadoCliente } from '../service/model/recadoCliente';
+
 import { RecadoService } from '../service/recado.service';
 
 @Component({

@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -12,11 +13,15 @@ import { DropdownService } from 'src/app/shared/service/dropdown.service';
 import { EstadoCivil } from 'src/app/shared/model/estado-civil';
 import { UsuarioPerfil } from '../service/model/usuario-perfil';
 import { FormBasicComponent } from 'src/app/shared/form-basic/form-basic.component';
+import { AuthenticationService } from 'src/app/login/_services/authentication.service';
+
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-dados-pessoais',
   templateUrl: './dados-pessoais.component.html',
-  styleUrls: ['./dados-pessoais.component.scss']
+  styleUrls: ['./dados-pessoais.component.scss'],
+  providers: [DatePipe]
 })
 export class DadosPessoaisComponent extends FormBasicComponent implements OnInit, OnDestroy {
 
@@ -32,7 +37,9 @@ export class DadosPessoaisComponent extends FormBasicComponent implements OnInit
     private localeService: BsLocaleService,
     private modalService: BsModalService,
     private pflService: PerfilService,
-    private ddwService: DropdownService
+    private ddwService: DropdownService,
+    private authenticationService: AuthenticationService, 
+    private datePipe: DatePipe
   ) {
     super();
     //CPF> Validators.pattern(/^(\d{3}\.){2}\d{3}\-\d{2}$/)]
@@ -59,7 +66,9 @@ export class DadosPessoaisComponent extends FormBasicComponent implements OnInit
     this.estadosCivis = this.ddwService.getEstadoCivil();
     this.opcaoMF = this.ddwService.getOpcaoMF();
 
-    this.pflService.recuperarPerfil(1)
+    let currentUser = this.authenticationService.currentUserValue;
+
+    this.pflService.recuperarPerfil(currentUser.id)
       .pipe(takeUntil(this.unsub$))
       .subscribe(retorno => {
         this.inicializarFormPessoal(retorno);
@@ -67,6 +76,7 @@ export class DadosPessoaisComponent extends FormBasicComponent implements OnInit
   }
 
   inicializarFormPessoal(perfil: UsuarioPerfil) {
+    var datePipe=new DatePipe("en-US");
     if (perfil) {
       this.formulario.patchValue({
         id: perfil.id,
@@ -76,7 +86,7 @@ export class DadosPessoaisComponent extends FormBasicComponent implements OnInit
         nome: perfil.nome,
         apelido: perfil.apelido,
         cpf: perfil.cpf,
-        dataNascimento: perfil.dataNascimento,
+        dataNascimento: datePipe.transform(perfil.dataNascimento,'dd-MM-yyyy'),
         estadoCivil: perfil.estadoCivil,
         sexo: perfil.sexo,
         sobre: perfil.sobre,
@@ -92,14 +102,18 @@ export class DadosPessoaisComponent extends FormBasicComponent implements OnInit
   }
 
   submit() {
+    this.formulario.patchValue({dataNascimento:moment(this.formulario.value['dataNascimento'], 'DD-MM-YYYY')});
     this.pflService.atualizarPerfil(this.formulario.value['id'], JSON.stringify(this.formulario.value))
       .pipe(takeUntil(this.unsub$))
       .subscribe(retorno => {
         console.log(retorno);
+        this.formulario.patchValue({dataNascimento: this.formulario.value['dataNascimento'].format('DD-MM-YYYY')});
       },
       (error: any) => {
         console.log(error);
       });
+      console.log(this.formulario.value['dataNascimento']);
+    
   }
 
   ngOnDestroy() {

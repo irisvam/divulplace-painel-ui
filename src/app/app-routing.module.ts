@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './login/_helpers/auth.guard';
 
 const routes: Routes = [{
   path: '',
@@ -10,20 +11,13 @@ const routes: Routes = [{
     description: 'Bem Vindo!'
   }, children: [{
     path: '',
-    component: HomeComponent
+    component: HomeComponent, canActivate: [AuthGuard]
   }, {
     path: 'painel',
     loadChildren: () => import('./painel/painel.module').then(m => m.PainelModule),
     data: {
       title: 'Painel de Controle',
       description: 'Encontre o que procure aqui!'
-    }
-  }, {
-    path: 'perfil',
-    loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilModule),
-    data: {
-      title: 'Perfil',
-      description: 'Atualize suas informações pessoais!'
     }
   }, {
     path: 'perfil',
@@ -129,19 +123,18 @@ const routes: Routes = [{
   }]
 }, {
   path: 'login',
+  loadChildren: () => import('./login/auth/auth.module').then(m => m.AuthModule),
   data: {
     customLayout: true
-  }, children: [
-    {
-      path: 'auth',
-      loadChildren: () => import('./login/auth/auth.module').then(m => m.AuthModule)
-    },
-    {
-      path: 'register',
-      loadChildren: () => import('./login/register/register.module').then(m => m.RegisterModule)
-    }
-  ]
-}];
+  }
+}, {
+  path: 'register',
+  loadChildren: () => import('./login/register/register.module').then(m => m.RegisterModule),
+  data: {
+    customLayout: true
+  }
+},
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 
+import { Novidade } from './model/novidade';
+
 @Injectable({
   providedIn: 'root'
 })

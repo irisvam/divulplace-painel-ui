@@ -1,4 +1,4 @@
-class MensagemResumo {
+export interface MensagemResumo {
     id: number;
     afiliado: {
         id: number;

@@ -3,6 +3,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { takeUntil, map, switchMap } from 'rxjs/operators';
 import { Subject, empty } from 'rxjs';
 
+import { AvisoSistema } from '../service/model/avisoSistema';
+
 import { AvisoService } from '../service/aviso.service';
 import { ActivatedRoute } from '@angular/router';
 

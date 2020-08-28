@@ -1,4 +1,4 @@
-class RecadoResumo {
+export interface RecadoResumo {
     id: number;
     cliente: {
         id: number;

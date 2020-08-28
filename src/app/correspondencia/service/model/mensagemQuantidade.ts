@@ -1,4 +1,4 @@
-class MensagemQuantidade {
+export interface MensagemQuantidade {
     id: number;
     nome: string;
     img: string;

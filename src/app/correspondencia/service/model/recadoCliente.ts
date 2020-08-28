@@ -1,4 +1,4 @@
-class RecadoCliente {
+export interface RecadoCliente {
     id: number;
     nome: string;
     email: string;

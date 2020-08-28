@@ -1,4 +1,4 @@
-class AvisoSistema {
+export interface AvisoSistema {
     id: number;
     titulo: string;
     dhEnvio: Date;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { take } from 'rxjs/operators';
 
@@ -11,7 +11,10 @@ import { UsuarioPerfil } from './model/usuario-perfil';
 })
 export class PerfilService {
 
-  private readonly API = `${environment.API}usuarios`;
+  //private readonly API = `${environment.API}usuarios`;
+  private readonly API = 'http://localhost:4200/api/divulplace-api-usuario/usuarios';
+  
+  private opcoes = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
   
   constructor(private http: HttpClient) { }
 
@@ -20,6 +23,6 @@ export class PerfilService {
   }
 
   atualizarPerfil(id: number, json: string){
-    return this.http.put(`${this.API}/${id}`, json).pipe(take(1));
+    return this.http.put(`${this.API}/${id}`, json, this.opcoes).pipe(take(1));
   }
 }

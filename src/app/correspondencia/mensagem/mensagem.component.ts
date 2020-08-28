@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, empty } from 'rxjs';
 import { takeUntil, map, switchMap } from 'rxjs/operators';
 
+import { MensagemQuantidade } from '../service/model/mensagemQuantidade';
+import { MensagemAfiliado } from '../service/model/mensagemAfiliado';
+
 import { MensagemService } from '../service/mensagem.service';
 
 @Component({

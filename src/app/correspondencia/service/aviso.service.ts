@@ -5,6 +5,9 @@ import { take } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 
+import { AvisoResumo } from './model/avisoResumo';
+import { AvisoSistema } from './model/avisoSistema';
+
 @Injectable({
   providedIn: 'root'
 })

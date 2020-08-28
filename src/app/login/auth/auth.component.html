@@ -7,14 +7,20 @@
         <div class="login-box-body">
             <p class="login-box-msg">Login</p>
 
-            <form action="/" method="post">
-                <div class="form-group has-feedback">
-                    <input type="email" class="form-control" placeholder="E-mail">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+                <div class="form-group has-feedback" [ngClass]="verificarErroCss('username')">
+                    <div class="input-group" style="width: 100%">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="E-mail" formControlName="username">
+                    </div>
+                    <app-form-feedback [control]="formulario.get('username')" label="E-mail"></app-form-feedback>
                 </div>
-                <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Senha">
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <div class="form-group has-feedback" [ngClass]="verificarErroCss('password')">
+                    <div class="input-group" style="width: 100%">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="password" class="form-control" id="inputSenha" placeholder="Senha" formControlName="password">
+                    </div>
+                    <app-form-feedback [control]="formulario.get('password')" label="Senha"></app-form-feedback>
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
@@ -31,14 +37,14 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">
-                        <button type="button" routerLink="/" class="btn btn-primary btn-block btn-flat">Entrar</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
 
             <a href="#">Esqueci minha senha</a><br>
-            <a routerLink="/login/register" class="text-center">Registrar como novo membro</a>
+            <a routerLink="/register" class="text-center">Registrar como novo membro</a>
 
         </div>
         <!-- /.login-box-body -->

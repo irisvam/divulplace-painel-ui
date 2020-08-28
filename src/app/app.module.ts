@@ -14,7 +14,11 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { LoadingPageModule, MaterialBarModule } from 'angular-loading-page';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';   //Import the layout module.
+import { HomeComponent } from './home/home.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { JwtInterceptor } from './login/_helpers/jwt.interceptor';
+import { ErrorInterceptor } from './login/_helpers/error.interceptor';
 
 @NgModule({
   imports: [
@@ -29,7 +33,10 @@ import { HomeComponent } from './home/home.component';   //Import the layout mod
     AppComponent,
     HomeComponent
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

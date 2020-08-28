@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 
+import { MensagemResumo } from 'src/app/correspondencia/service/model/mensagemResumo';
+import { RecadoResumo } from 'src/app/correspondencia/service/model/recadoResumo';
+import { AvisoResumo } from 'src/app/correspondencia/service/model/avisoResumo';
+
 import { MensagemService } from 'src/app/correspondencia/service/mensagem.service';
 import { RecadoService } from 'src/app/correspondencia/service/recado.service';
 import { AvisoService } from 'src/app/correspondencia/service/aviso.service';
+import { AuthenticationService } from 'src/app/login/_services/authentication.service';
 
 @Component({
   selector: 'app-header-top',
@@ -25,7 +30,8 @@ export class HeaderTopComponent implements OnInit {
     private msgService: MensagemService,
     private rcdService: RecadoService,
     private avsService: AvisoService,
-    private router: Router
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -96,7 +102,8 @@ export class HeaderTopComponent implements OnInit {
 
   sair() {
     
-    this.router.navigate(['login/auth']);
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
   }
 
 }

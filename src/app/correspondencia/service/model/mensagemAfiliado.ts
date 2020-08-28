@@ -1,4 +1,4 @@
-class MensagemAfiliado {
+export interface MensagemAfiliado {
     id: number;
     msg: string;
     dhEnvio: Date;

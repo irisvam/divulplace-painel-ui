@@ -55,13 +55,14 @@
         <div class="form-group">
             <div class="col-sm-12">
                 <div class="input-group">
-                    <div class="input-group-btn" dropdown>
-                        <button id="button-basic" dropdownToggle type="button" class="btn btn-info dropdown-toggle"
-                            aria-controls="dropdown-basic" title="{{ rdsSelecionado.nome }}">
+                    <div mk-dropdown class="input-group-btn" [isWrapper]="false">
+                        <mk-dropdown-toggle>
+                        <button #toggleElement type="button" class="btn btn-info dropdown-toggle" title="{{ rdsSelecionado.nome }}">
                             <span class="fa fa-{{ rdsSelecionado.icone }}" style="margin-right: 5px;"></span>
-                            <span class="caret"></span>
+                            <span class="fa fa-caret-down"></span>
                         </button>
-                        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                        </mk-dropdown-toggle>
+                        <mk-dropdown-menu>
                             <li role="menuitem" *ngFor="let redesocial of redesSociais | async" >
                                 <a class="dropdown-item" (click)="mudarRedeSocialIcone(redesocial)">
                                     <span class="fa fa-{{ redesocial.icone }}"></span>{{ redesocial.nome }}
@@ -73,9 +74,9 @@
                                     <span class="fa fa-{{ rdsOutro.icone }}"></span>{{ rdsOutro.nome }}
                                 </a>
                             </li>
-                        </ul>
+                        </mk-dropdown-menu>
                     </div>
-                    <input type="text" class="form-control" #inputLinkSocial >
+                    <input type="text" class="form-control" #inputLinkSocial>
                     <div class="input-group-btn">
                         <button type="button" class="btn btn-success btn-flat" title="{{ rdsBotao.nome }}" (click)="atualizarListaLinkSocial(inputLinkSocial)"><i class="fa fa-{{ rdsBotao.icone }}"></i></button>
                     </div>
@@ -86,7 +87,7 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <ul class="todo-list">
-                    <li formArrayName="redesSociais" *ngFor="let link of formulario.get('redesSociais').controls; let i = index">
+                    <li formArrayName="redesSociais" *ngFor="let link of formulario.get('redesSociais'); let i = index">
                         <span class="handle">
                             <i class="fa fa-ellipsis-v"></i>
                             <i class="fa fa-ellipsis-v"></i>

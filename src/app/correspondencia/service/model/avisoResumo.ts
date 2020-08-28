@@ -1,4 +1,4 @@
-class AvisoResumo {
+export interface AvisoResumo {
     id: number;
     tipo: string;
     qtde: number;

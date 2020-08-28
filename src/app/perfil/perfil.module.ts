@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { BoxModule } from 'angular-admin-lte';
+import { BoxModule, DropdownModule as mkDropdownModule } from 'angular-admin-lte';
 
 import { PerfilRoutingModule } from './perfil-routing.module';
 import { SharedModule } from '../shared/shared.module';
@@ -37,7 +37,8 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     NgxMaskModule.forRoot(options),
     PerfilRoutingModule,
     BoxModule,
-    SharedModule
+    SharedModule,
+    mkDropdownModule
   ]
 })
 export class PerfilModule { }
