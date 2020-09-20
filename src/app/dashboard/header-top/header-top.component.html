@@ -97,14 +97,14 @@
       <mk-dropdown-toggle>
         <a #toggleElement>
           <img src="assets/img/user.png" class="user-image" alt="User Image">
-          <span class="hidden-xs">Nome Usuário</span>
+          <span class="hidden-xs">{{ afiliado.name }}</span>
         </a>
       </mk-dropdown-toggle>
       <mk-dropdown-menu>
         <div class="box box-widget widget-user" style="margin-bottom: 0px;">
           <!-- Add the bg color to the header using any of the bg-* classes -->
           <div class="widget-user-header bg-aqua-active">
-            <h3 class="widget-user-username">Nome Usuário</h3>
+            <h3 class="widget-user-username">{{ afiliado.name }}</h3>
             <h5 class="widget-user-desc"> Promoter Start 
               <span class="pull-right">
                 <i class="fa fa-star text-yellow"></i>

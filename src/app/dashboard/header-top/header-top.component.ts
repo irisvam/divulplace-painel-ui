@@ -9,6 +9,7 @@ import { MensagemService } from 'src/app/correspondencia/service/mensagem.servic
 import { RecadoService } from 'src/app/correspondencia/service/recado.service';
 import { AvisoService } from 'src/app/correspondencia/service/aviso.service';
 import { AuthenticationService } from 'src/app/login/_services/authentication.service';
+import { User } from 'src/app/login/_models/user';
 
 @Component({
   selector: 'app-header-top',
@@ -17,6 +18,7 @@ import { AuthenticationService } from 'src/app/login/_services/authentication.se
 })
 export class HeaderTopComponent implements OnInit {
 
+  afiliado: User;
   mensagens: MensagemResumo[];
   qtdeMensagens: number;
 
@@ -32,7 +34,11 @@ export class HeaderTopComponent implements OnInit {
     private avsService: AvisoService,
     private router: Router,
     private authenticationService: AuthenticationService
-  ) { }
+  ) {
+    
+    this.afiliado = this.authenticationService.currentUserValue;
+    console.log(this.afiliado);
+   }
 
   ngOnInit() {
     this.msgService.listarRecentes().subscribe(retorno => {

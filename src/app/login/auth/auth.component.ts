@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
-import { FormBasicComponent } from 'src/app/shared/form-basic/form-basic.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '../_services/authentication.service';
+
 import { first } from 'rxjs/operators';
+
+import { FormBasicComponent } from 'src/app/shared/form-basic/form-basic.component';
+import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
   selector: 'app-auth',
