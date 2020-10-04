@@ -10,6 +10,7 @@ import { EnderecoViaCep } from '../model/endereco-viacep';
 import { CidadesBr } from '../model/cidades-br';
 import { empty } from 'rxjs';
 import { RedeSocial } from '../model/rede-social';
+import { SexoGenero } from '../model/sexo-genero';
 
 @Injectable({
   providedIn: 'root'
@@ -31,11 +32,8 @@ export class DropdownService {
     ];
   }
 
-  getOpcaoMF() {
-    return [
-      { opcao: 'M', descricao: 'Masculino' },
-      { opcao: 'F', descricao: 'Feminino' }
-    ];
+  getOpcaoGeneros() {
+    return this.http.get<SexoGenero[]>('assets/json/sexogenero.json').pipe(take(1));
   }
 
   /* https://restcountries.eu/ */

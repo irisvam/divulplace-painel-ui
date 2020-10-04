@@ -11,7 +11,7 @@ const routes: Routes = [{
     description: 'Bem Vindo!'
   }, children: [{
     path: '',
-    component: HomeComponent, canActivate: [AuthGuard]
+    loadChildren: () => import('./painel/painel.module').then(m => m.PainelModule), canActivate: [AuthGuard]
   }, {
     path: 'painel',
     loadChildren: () => import('./painel/painel.module').then(m => m.PainelModule),

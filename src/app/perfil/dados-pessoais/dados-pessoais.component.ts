@@ -11,6 +11,7 @@ import { PerfilService } from '../service/perfil.service';
 import { DropdownService } from 'src/app/shared/service/dropdown.service';
 
 import { EstadoCivil } from 'src/app/shared/model/estado-civil';
+import { SexoGenero } from 'src/app/shared/model/sexo-genero';
 import { UsuarioPerfil } from '../service/model/usuario-perfil';
 import { FormBasicComponent } from 'src/app/shared/form-basic/form-basic.component';
 import { AuthenticationService } from 'src/app/login/_services/authentication.service';
@@ -27,7 +28,7 @@ export class DadosPessoaisComponent extends FormBasicComponent implements OnInit
 
   modalMudaSenha: BsModalRef;
   imgUsuario = "/assets/img/user.png";
-  opcaoMF: any[];
+  sexoGeneros: Observable<SexoGenero[]>;
   estadosCivis: Observable<EstadoCivil[]>;
 
   unsub$ = new Subject();
@@ -58,13 +59,12 @@ export class DadosPessoaisComponent extends FormBasicComponent implements OnInit
       dataNascimento: [null, Validators.required],
       estadoCivil: [null],
       sexo: [null],
-      sobre: [null],
       email: [null, [Validators.required, Validators.email]],
       link: [null, Validators.required]
     });
 
     this.estadosCivis = this.ddwService.getEstadoCivil();
-    this.opcaoMF = this.ddwService.getOpcaoMF();
+    this.sexoGeneros = this.ddwService.getOpcaoGeneros();
 
     let currentUser = this.authenticationService.currentUserValue;
 
@@ -89,11 +89,12 @@ export class DadosPessoaisComponent extends FormBasicComponent implements OnInit
         dataNascimento: datePipe.transform(perfil.dataNascimento,'dd-MM-yyyy'),
         estadoCivil: perfil.estadoCivil,
         sexo: perfil.sexo,
-        sobre: perfil.sobre,
         email: perfil.email,
         link: perfil.link
       });
-      this.imgUsuario = this.formulario.value['img'];
+      if(null != this.formulario.value['img']){
+        this.imgUsuario = this.formulario.value['img'];
+      }
     }
   }
 

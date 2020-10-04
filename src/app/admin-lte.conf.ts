@@ -2,8 +2,7 @@ export var adminLteConf = {
   skin: 'blue',
   sidebarLeftMenu: [
     {label: 'MENU', separator: true},
-    {label: 'Início', route: '/', iconClasses: 'fa fa-home'},
-    {label: 'Painel de Controle', route: 'painel', iconClasses: 'fa fa-dashboard'},
+    {label: 'Painel de Controle', route: '/', iconClasses: 'fa fa-dashboard'},
     {label: 'Perfil', route: 'perfil', iconClasses: 'fa fa-user-circle'},
     {label: 'SERVIÇOS', separator: true},
     {label: 'Portfólio', route: 'servicos/portfolio', iconClasses: 'fa fa-address-book-o'},

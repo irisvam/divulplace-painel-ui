@@ -78,7 +78,7 @@
         </div>
         <div class="form-group">
             <label for="selectCivil" class="col-sm-3 control-label">Estado Civil</label>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <select id="selectCivil" class="form-control" formControlName="estadoCivil">
                     <option value="">Selecione...</option>
                     <option *ngFor="let estadocivil of estadosCivis | async" [value]="estadocivil?.opcao">{{ estadocivil?.descricao }}</option>
@@ -86,18 +86,12 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="radioSexo" class="col-sm-3 control-label">Sexo</label>
-            <div class="col-sm-9">
-                <label class="radio-inline" *ngFor="let opcaoSexo of opcaoMF">
-                    <input type="radio" name="sexo" class="minimal" [value]="opcaoSexo.opcao" formControlName="sexo">
-                    {{ opcaoSexo.descricao }}
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="areaSobre" class="col-sm-3 control-label">Sobre</label>
-            <div class="col-sm-6">
-                <textarea id="Sobre" class="form-control" rows="3" placeholder="Sobre ..." formControlName="sobre"></textarea>
+            <label for="selectGenero" class="col-sm-3 control-label">Gênero</label>
+            <div class="col-sm-4">
+                <select id="selectGenero" class="form-control" formControlName="sexo">
+                    <option value="">Selecione...</option>
+                    <option *ngFor="let genero of sexoGeneros | async" [value]="genero?.opcao">{{ genero?.descricao }}</option>
+                </select>
             </div>
         </div>
         <div class="form-group" [ngClass]="verificarErroCss('email')">

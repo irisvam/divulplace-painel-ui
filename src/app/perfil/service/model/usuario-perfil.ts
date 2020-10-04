@@ -9,7 +9,6 @@ export interface UsuarioPerfil {
     dataNascimento: Date;
     estadoCivil: string;
     sexo: string;
-    sobre: string;
     email: string;
     link: string;
 }

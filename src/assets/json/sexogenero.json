@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "opcao": "MASCULINO",
+        "descricao": "Masculino(a)"
+    },
+    {
+        "id": 2,
+        "opcao": "FEMININO",
+        "descricao": "Feminino(a)"
+    },
+    {
+        "id": 3,
+        "opcao": "INTERSEXO",
+        "descricao": "Intersexo"
+    },
+    {
+        "id": 4,
+        "opcao": "NDA",
+        "descricao": "Não declarado(a)"
+    }
+]

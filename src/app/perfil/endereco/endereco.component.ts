@@ -87,7 +87,7 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
       )
       .subscribe(retorno => retorno.cep ? this.atualizarEndereco(retorno) : {});
 
-    this.endService.recuperarEndereco(2)
+    this.endService.recuperarEndereco(10)
     .pipe(takeUntil(this.unsub$))
     .subscribe(retorno => {
       this.inicializarFormEndereco(retorno);
