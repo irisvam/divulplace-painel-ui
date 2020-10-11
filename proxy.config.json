@@ -1,0 +1,18 @@
+{
+  "/api/*":{
+    "target": "http://localhost:8080/divulplace-api-usuario",
+    "secure": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api" : ""
+    }
+  },
+  "/viacep/*":{
+    "target": "`https://viacep.com.br",
+    "secure": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/viacep" : ""
+    }
+  }
+}

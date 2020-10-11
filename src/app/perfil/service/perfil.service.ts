@@ -12,7 +12,7 @@ import { UsuarioPerfil } from './model/usuario-perfil';
 export class PerfilService {
 
   //private readonly API = `${environment.API}usuarios`;
-  private readonly API = 'http://localhost:4200/api/divulplace-api-usuario/perfil';
+  private readonly API = '/api/perfil';
   
   private opcoes = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
   

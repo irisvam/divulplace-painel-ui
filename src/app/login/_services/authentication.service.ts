@@ -14,7 +14,7 @@ import { ɵNoopAnimationDriver } from '@angular/animations/browser';
 export class AuthenticationService {
 
   //private readonly API = `${environment.API}`;
-  private readonly API = 'http://localhost:4200/api/divulplace-api-usuario/';
+  private readonly API = '/api/';
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;

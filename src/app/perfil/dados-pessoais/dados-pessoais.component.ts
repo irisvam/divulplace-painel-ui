@@ -9,12 +9,12 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { PerfilService } from '../service/perfil.service';
 import { DropdownService } from 'src/app/shared/service/dropdown.service';
+import { AuthenticationService } from 'src/app/login/_services/authentication.service';
 
 import { EstadoCivil } from 'src/app/shared/model/estado-civil';
 import { SexoGenero } from 'src/app/shared/model/sexo-genero';
 import { UsuarioPerfil } from '../service/model/usuario-perfil';
 import { FormBasicComponent } from 'src/app/shared/form-basic/form-basic.component';
-import { AuthenticationService } from 'src/app/login/_services/authentication.service';
 
 import * as moment from 'moment';
 
@@ -113,8 +113,6 @@ export class DadosPessoaisComponent extends FormBasicComponent implements OnInit
       (error: any) => {
         console.log(error);
       });
-      console.log(this.formulario.value['dataNascimento']);
-    
   }
 
   ngOnDestroy() {

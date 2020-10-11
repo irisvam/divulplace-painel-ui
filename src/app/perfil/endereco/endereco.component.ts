@@ -5,6 +5,7 @@ import { DropdownService } from 'src/app/shared/service/dropdown.service';
 import { Observable, empty, Subject } from 'rxjs';
 import { map, switchMap, takeUntil, tap, distinctUntilChanged } from 'rxjs/operators';
 import { EnderecoService } from '../service/endereco.service';
+import { AuthenticationService } from 'src/app/login/_services/authentication.service';
 
 import { UsuarioEndereco } from '../service/model/usuario-endereco';
 import { EstadosBr } from 'src/app/shared/model/estados-br';
@@ -24,6 +25,7 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
   estados: EstadosBr[];
   cidades: CidadesBr[];
   icEnderecoBr: boolean;
+  idUsuario: number;
 
   unsub$ = new Subject();
 
@@ -31,6 +33,7 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
     private formBuilder: FormBuilder,
     private ddwService: DropdownService,
     private endService: EnderecoService,
+    private authenticationService: AuthenticationService
   ) {
     super();
   }
@@ -39,14 +42,14 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
     this.formulario = this.formBuilder.group({
       id: [null],
       pais: ['', Validators.required],
-      cep: [null, [Validators.required, Validators.pattern(/^[0-9]{8}$/)]],
-      endereco: [null, Validators.required],
+      cep: [null, [Validators.pattern(/^[0-9]{8}$/)]],
+      logradouro: [null, Validators.required],
       numero: [null],
       complemento: [null],
       bairro: [null],
-      estado: ['', Validators.required],
-      cidadeId: ['', Validators.required],
-      cidade: ['', Validators.required]
+      estado: [''],
+      cidadeId: [null],
+      cidade: ['']
     });
 
     this.paises = this.ddwService.getPaises();
@@ -82,12 +85,19 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
     this.formulario.get('cep').statusChanges
       .pipe(
         distinctUntilChanged(),
-        switchMap(status => status === 'VALID' ? this.ddwService.getEnderecoBr(this.formulario.get('cep').value) : empty()),
+        switchMap(status => status === 'VALID' && null != this.formulario.get('cep').value ? this.ddwService.getEnderecoBr(this.formulario.get('cep').value) : empty()),
         takeUntil(this.unsub$)
       )
-      .subscribe(retorno => retorno.cep ? this.atualizarEndereco(retorno) : {});
+      .subscribe(retorno => {
+        this.atualizarEndereco(retorno);
+      },
+      (error: any) => {
+        console.log(error);
+      });
 
-    this.endService.recuperarEndereco(10)
+    this.idUsuario = this.authenticationService.currentUserValue.id;
+
+    this.endService.recuperarEndereco(this.idUsuario)
     .pipe(takeUntil(this.unsub$))
     .subscribe(retorno => {
       this.inicializarFormEndereco(retorno);
@@ -100,7 +110,7 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
         id: endereco.id,
         pais: endereco.pais,
         cep: endereco.cep,
-        endereco: endereco.logradouro,
+        logradouro: endereco.logradouro,
         numero: endereco.numero,
         complemento: endereco.complemento,
         bairro: endereco.bairro,
@@ -113,7 +123,7 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
 
   atualizarEndereco(endereco: EnderecoViaCep){
     this.formulario.patchValue({
-      endereco: endereco.logradouro,
+      logradouro: endereco.logradouro,
       bairro: endereco.bairro,
       estado: endereco.uf,
       cidadeId: endereco.ibge,
@@ -130,6 +140,34 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
   }
 
   submit() {
+    if(null == this.formulario.value['id']){
+      this.cadastrar();
+    } else {
+      this.atualizar();
+    }
+  }
+
+  cadastrar(){
+    this.endService.cadastrarEndereco(this.idUsuario, JSON.stringify(this.formulario.value))
+      .pipe(takeUntil(this.unsub$))
+      .subscribe(retorno => {
+        console.log(retorno);
+        this.formulario.patchValue({id: retorno.id});
+      },
+      (error: any) => {
+        console.log(error);
+      });
+  }
+
+  atualizar(){
+    this.endService.atualizarEndereco(this.idUsuario, JSON.stringify(this.formulario.value))
+      .pipe(takeUntil(this.unsub$))
+      .subscribe(retorno => {
+        console.log(retorno);
+      },
+      (error: any) => {
+        console.log(error);
+      });
   }
 
   ngOnDestroy() {

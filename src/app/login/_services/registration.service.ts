@@ -8,7 +8,7 @@ import { take } from 'rxjs/operators';
 export class RegistrationService {
 
   //private readonly API = `${environment.API}`;
-  private readonly API = 'http://localhost:4200/api/divulplace-api-usuario/auth';
+  private readonly API = '/api/auth';
   
   private opcoes = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 
