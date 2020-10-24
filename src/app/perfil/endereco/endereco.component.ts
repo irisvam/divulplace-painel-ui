@@ -42,7 +42,7 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
     this.formulario = this.formBuilder.group({
       id: [null],
       pais: ['', Validators.required],
-      cep: [null, [Validators.pattern(/^[0-9]{8}$/)]],
+      cep: [null],
       logradouro: [null, Validators.required],
       numero: [null],
       complemento: [null],
@@ -60,7 +60,14 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
         switchMap(value => {
           if (value === 'BRA') {
             this.icEnderecoBr = true;
+            this.formulario.get('cidade').setValidators([]);
+            this.formulario.get('cep').setValidators(Validators.pattern(/^[0-9]{8}$/));
+            this.formulario.get('estado').setValidators(Validators.required);
+            this.formulario.get('cidadeId').setValidators(Validators.required);
             return this.ddwService.getEstadosBr();
+          } else {
+            this.formulario.get('cep').setValidators([]);
+            this.formulario.get('cidade').setValidators(Validators.required);
           }
           this.icEnderecoBr = false;
           return empty();
@@ -82,6 +89,7 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
       )
       .subscribe(cidades => this.cidades = cidades);
 
+      /**
     this.formulario.get('cep').statusChanges
       .pipe(
         distinctUntilChanged(),
@@ -93,7 +101,7 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
       },
       (error: any) => {
         console.log(error);
-      });
+      }); **/
 
     this.idUsuario = this.authenticationService.currentUserValue.id;
 

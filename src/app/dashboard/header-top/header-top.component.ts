@@ -37,7 +37,6 @@ export class HeaderTopComponent implements OnInit {
   ) {
     
     this.afiliado = this.authenticationService.currentUserValue;
-    console.log(this.afiliado);
    }
 
   ngOnInit() {
