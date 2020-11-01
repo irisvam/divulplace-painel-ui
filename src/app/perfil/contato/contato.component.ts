@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { DropdownService } from 'src/app/shared/service/dropdown.service';
 
 import { FormBasicComponent } from 'src/app/shared/form-basic/form-basic.component';
 import { RedeSocial } from 'src/app/shared/model/rede-social';
 import { LinkSocial } from '../service/model/link-social';
+import { UsuarioContato } from '../service/model/usuario-contato';
+
+import { AuthenticationService } from 'src/app/login/_services/authentication.service';
+import { ContatoService } from '../service/contato.service';
+import { SocialService } from '../service/social.service';
 
 @Component({
   selector: 'app-contato',
@@ -29,40 +35,16 @@ export class ContatoComponent extends FormBasicComponent implements OnInit {
   }
 
   redesSociais: Observable<RedeSocial[]>;
-  linksSociais: LinkSocial[] = [
-    {
-      id: 1,
-      url: 'http://www.associado.com',
-      icone: 'link',
-      situacao: true,
-      edicao: false
-    },
-    {
-      id: 2,
-      url: 'http://www.facebook.com/nomeusuario',
-      icone: 'facebook-square',
-      situacao: true,
-      edicao: false
-    },
-    {
-      id: 3,
-      url: 'http://www.linkedin.com/in/nomeusuario',
-      icone: 'linkedin-square',
-      situacao: true,
-      edicao: false
-    },
-    {
-      id: 4,
-      url: 'https://www.twitter.com/nomeusuario',
-      icone: 'twitter',
-      situacao: true,
-      edicao: false
-    }
-  ];
+  idUsuario: number;
+  
+  unsub$ = new Subject();
 
   constructor(
     private formBuilder: FormBuilder,
-    private ddwService: DropdownService
+    private ddwService: DropdownService,
+    private cttService: ContatoService,
+    private solService: SocialService,
+    private authenticationService: AuthenticationService
   ) {
     super();
   }
@@ -85,12 +67,36 @@ export class ContatoComponent extends FormBasicComponent implements OnInit {
         situacao: true,
         edicao: false
       }),
-      redesSociais: this.buildSociais()
+      redesSociais: new FormArray([])
     });
 
     this.redesSociais = this.ddwService.getRedeSocial();
     this.inicializarSelecaoLinkSocial();
     this.rdsRemovidos = new FormArray([]);
+
+    this.idUsuario = this.authenticationService.currentUserValue.id;
+
+    this.cttService.recuperarContato(this.idUsuario)
+      .pipe(takeUntil(this.unsub$))
+      .subscribe(retorno => {
+        this.inicializarFormContato(retorno);
+      });
+
+    this.recuperarRedesSociais();
+  }
+
+  inicializarFormContato(contato: UsuarioContato) {
+    if (contato) {
+      this.formulario.patchValue({
+        id: contato.id,
+        telefone: contato.telefone,
+        celular01: contato.celular01,
+        celular01WS: contato.celular01WS,
+        celular02: contato.celular02,
+        celular02WS: contato.celular02WS,
+        skype: contato.skype
+      });
+    }
   }
 
   inicializarSelecaoLinkSocial() {
@@ -98,20 +104,25 @@ export class ContatoComponent extends FormBasicComponent implements OnInit {
     this.rdsSelecionado = this.rdsOutro;
   }
 
-  buildSociais() {
+  buildSociais(linksSociais :LinkSocial[]) {
 
-    let values = this.linksSociais.map(v => this.formBuilder.group({
-      id: v.id,
-      url: v.url,
-      icone: v.icone,
-      situacao: true,
-      edicao: false
-    }));
+    let values = [];
+    
+    if(linksSociais){
+      values = linksSociais.map(v => this.formBuilder.group({
+        id: v.id,
+        url: v.url,
+        icone: v.icone,
+        situacao: true,
+        edicao: false
+      }));
+    }
 
     return this.formBuilder.array(values);
   }
 
   mudarRedeSocialIcone(rdSocial: RedeSocial) {
+
     this.rdsSelecionado = rdSocial;
   }
 
@@ -161,6 +172,64 @@ export class ContatoComponent extends FormBasicComponent implements OnInit {
   }
 
   submit() {
-    console.log('SUBIMETER');
+    
+    for (let control of this.rdsRemovidos.controls) {
+      (<FormArray>this.formulario.get('redesSociais')).push(control);
+    }
+    console.log(JSON.stringify(this.formulario.value))
+    if(null == this.formulario.value['id']){
+      this.cadastrar();
+    } else {
+      this.atualizar();
+    }
   }
+
+  cadastrar(){
+    this.cttService.cadastrarContato(this.idUsuario, JSON.stringify(this.formulario.value))
+      .pipe(takeUntil(this.unsub$))
+      .subscribe(retorno => {
+        console.log(retorno);
+        this.formulario.patchValue({id: retorno.id});
+        this.recuperarRedesSociais();
+      },
+      (error: any) => {
+        console.log(error);
+      });
+  }
+
+  atualizar(){
+    this.cttService.atualizarContato(this.idUsuario, JSON.stringify(this.formulario.value))
+      .pipe(takeUntil(this.unsub$))
+      .subscribe(retorno => {
+        console.log(retorno);
+        this.recuperarRedesSociais();
+      },
+      (error: any) => {
+        console.log(error);
+      });
+  }
+
+  recuperarRedesSociais() {
+
+    (<FormArray>this.formulario.get('redesSociais')).clear();
+
+    this.solService.recuperarRedesSociais(this.idUsuario)
+      .pipe(takeUntil(this.unsub$))
+      .subscribe(retorno => {
+        console.log(retorno);
+        let lista = this.buildSociais(retorno);
+        for (let control of lista.controls) {
+          (<FormArray>this.formulario.get('redesSociais')).push(control);
+        }
+      },
+      (error: any) => {
+        console.log(error);
+      });
+  }
+
+  ngOnDestroy() {
+    this.unsub$.next();
+    this.unsub$.complete();
+  }
+
 }

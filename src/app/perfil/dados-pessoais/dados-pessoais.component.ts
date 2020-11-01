@@ -39,8 +39,7 @@ export class DadosPessoaisComponent extends FormBasicComponent implements OnInit
     private modalService: BsModalService,
     private pflService: PerfilService,
     private ddwService: DropdownService,
-    private authenticationService: AuthenticationService, 
-    private datePipe: DatePipe
+    private authenticationService: AuthenticationService
   ) {
     super();
     //CPF> Validators.pattern(/^(\d{3}\.){2}\d{3}\-\d{2}$/)]
