@@ -58,14 +58,13 @@
             <div class="form-group">
                 <div class="col-sm-12">
                     <div class="input-group">
-                        <div mk-dropdown class="input-group-btn" [isWrapper]="false">
-                            <mk-dropdown-toggle>
-                            <button #toggleElement type="button" class="btn btn-info dropdown-toggle" title="{{ rdsSelecionado.nome }}">
+                        <div class="input-group-btn" dropdown container="body">
+                            <button id="button-basic" dropdownToggle type="button" class="btn btn-info dropdown-toggle"
+                                    aria-controls="dropdown-basic" title="{{ rdsSelecionado.nome }}" >
                                 <span class="fa fa-{{ rdsSelecionado.icone }}" style="margin-right: 5px;"></span>
                                 <span class="fa fa-caret-down"></span>
                             </button>
-                            </mk-dropdown-toggle>
-                            <mk-dropdown-menu>
+                            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
                                 <li role="menuitem" *ngFor="let iconesocial of redesSociais | async" >
                                     <a class="dropdown-item" (click)="mudarRedeSocialIcone(iconesocial)">
                                         <span class="fa fa-{{ iconesocial.icone }}"></span>{{ iconesocial.nome }}
@@ -77,7 +76,7 @@
                                         <span class="fa fa-{{ rdsOutro.icone }}"></span>{{ rdsOutro.nome }}
                                     </a>
                                 </li>
-                            </mk-dropdown-menu>
+                            </ul>
                         </div>
                         <input type="text" class="form-control" id="inputUrl" placeholder="http://www.meusite.com" formControlName="url">
                         <div class="input-group-btn">
@@ -110,7 +109,7 @@
                                     <div class="input-group">
                                         <input class="form-control" formControlName="url" type="text" />
                                         <div class="input-group-btn">
-                                            <button type="button" class="btn btn-success btn-flat" title="Atualizar" (click)="atualizarGroupLinkSocial(i)"><i class="fa fa-refresh"></i></button>
+                                            <button type="button" class="btn btn-warning btn-flat" title="Atualizar" (click)="atualizarGroupLinkSocial(i)"><i class="fa fa-refresh"></i></button>
                                         </div>
                                     </div>
                                 </div>

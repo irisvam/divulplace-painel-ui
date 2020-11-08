@@ -50,7 +50,7 @@ export class ContatoComponent extends FormBasicComponent implements OnInit {
   }
 
   ngOnInit() {
-    document.body.style.backgroundColor = '#da4733';
+    document.body.style.backgroundColor = '#222d32';
 
     this.formulario = this.formBuilder.group({
       id: [null],
