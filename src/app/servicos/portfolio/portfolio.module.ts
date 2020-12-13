@@ -13,11 +13,11 @@ import { PortfolioComponent } from './portfolio.component';
 import { ConsultorComponent } from './consultor/consultor.component';
 import { ProdutoComponent } from './produto/produto.component';
 import { EmpresaComponent } from './empresa/empresa.component';
-import { DiversosComponent } from './diversos/diversos.component';
+import { DivulgadorComponent } from './divulgador/divulgador.component';
 import { PessoalInfoComponent } from './pessoal-info/pessoal-info.component';
 import { ConsultorCrudComponent } from './consultor-crud/consultor-crud.component';
 import { ProdutoCrudComponent } from './produto-crud/produto-crud.component';
-import { DiversosCrudComponent } from './diversos-crud/diversos-crud.component';
+import { DivulgadorCrudComponent } from './divulgador-crud/divulgador-crud.component';
 import { EmpresaCrudComponent } from './empresa-crud/empresa-crud.component';
 import { EmpresaContatoComponent } from './empresa-contato/empresa-contato.component';
 
@@ -30,7 +30,7 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     ConsultorComponent, ConsultorCrudComponent, 
     ProdutoComponent, ProdutoCrudComponent, 
     EmpresaComponent, EmpresaCrudComponent, 
-    DiversosComponent, DiversosCrudComponent, 
+    DivulgadorComponent, DivulgadorCrudComponent, 
     PessoalInfoComponent, EmpresaContatoComponent
   ],
   imports: [

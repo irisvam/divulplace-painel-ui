@@ -5,11 +5,11 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBasicComponent } from 'src/app/shared/form-basic/form-basic.component';
 
 @Component({
-  selector: 'app-diversos-crud',
-  templateUrl: './diversos-crud.component.html',
-  styleUrls: ['./diversos-crud.component.scss']
+  selector: 'app-divulgador-crud',
+  templateUrl: './divulgador-crud.component.html',
+  styleUrls: ['./divulgador-crud.component.scss']
 })
-export class DiversosCrudComponent extends FormBasicComponent implements OnInit {
+export class DivulgadorCrudComponent extends FormBasicComponent implements OnInit {
 
   @Input() modal: BsModalRef;
   

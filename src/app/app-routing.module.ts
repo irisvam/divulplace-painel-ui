@@ -40,6 +40,13 @@ const routes: Routes = [{
           description: 'Divulgui-se!'
         }
       }, {
+        path: 'promoter',
+        loadChildren: () => import('./servicos/promoter/promoter.module').then(m => m.PromoterModule),
+        data: {
+          title: 'Promoter',
+          description: 'Monitore os seus rendimentos!'
+        }
+      }, {
         path: 'flyer',
         loadChildren: () => import('./servicos/flyer/flyer.module').then(m => m.FlyerModule),
         data: {
@@ -74,13 +81,6 @@ const routes: Routes = [{
         data: {
           title: 'Mensalidade',
           description: 'Fique em dia para não ficar de fora!'
-        }
-      }, {
-        path: 'promoter',
-        loadChildren: () => import('./financeiro/promoter/promoter.module').then(m => m.PromoterModule),
-        data: {
-          title: 'Promoter',
-          description: 'Monitore os seus rendimentos!'
         }
       }, {
         path: 'conta',

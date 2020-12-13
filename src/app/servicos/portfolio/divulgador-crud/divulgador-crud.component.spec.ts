@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DiversosCrudComponent } from './diversos-crud.component';
+import { DivulgadorCrudComponent } from './divulgador-crud.component';
 
 describe('DiversosCrudComponent', () => {
-  let component: DiversosCrudComponent;
-  let fixture: ComponentFixture<DiversosCrudComponent>;
+  let component: DivulgadorCrudComponent;
+  let fixture: ComponentFixture<DivulgadorCrudComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DiversosCrudComponent ]
+      declarations: [ DivulgadorCrudComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DiversosCrudComponent);
+    fixture = TestBed.createComponent(DivulgadorCrudComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
