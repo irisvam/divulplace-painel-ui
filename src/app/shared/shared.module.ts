@@ -6,14 +6,15 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 import { FormDebugComponent } from './form-debug/form-debug.component';
 import { FormFeedbackComponent } from './form-feedback/form-feedback.component';
+import { AlertModalComponent } from './alert-modal/alert-modal.component';
 
 @NgModule({
-  declarations: [FormDebugComponent, FormFeedbackComponent],
+  declarations: [FormDebugComponent, FormFeedbackComponent, AlertModalComponent],
   imports: [
     CommonModule,
     HttpClientModule,
     TooltipModule.forRoot()
   ],
-  exports: [FormDebugComponent, FormFeedbackComponent]
+  exports: [FormDebugComponent, FormFeedbackComponent, AlertModalComponent]
 })
 export class SharedModule { }

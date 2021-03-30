@@ -8,7 +8,6 @@ import { PerfilRoutingModule } from './perfil-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 
@@ -32,7 +31,6 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     CommonModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
-    ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     NgxMaskModule.forRoot(options),
     PerfilRoutingModule,

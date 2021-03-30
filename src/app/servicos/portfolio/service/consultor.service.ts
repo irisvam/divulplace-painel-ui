@@ -24,13 +24,15 @@ export class ConsultorService {
   }
 
   cadastrarServico(id: number, json: string){
-
     return this.http.post<RetornoCadastro>(`${this.API}/${id}/servicos`, json, this.opcoes).pipe(take(1));
   }
 
   atualizarServico(id: number, json: string){
-
     return this.http.put(`${this.API}/servicos/${id}`, json, this.opcoes).pipe(take(1));
+  }
+
+  deletarServico(id: number){
+    return this.http.delete(`${this.API}/servicos/${id}`).pipe(take(1));
   }
 
 }

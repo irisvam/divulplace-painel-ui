@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { BoxModule, DropdownModule } from 'angular-admin-lte';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 import { PortfolioRoutingModule } from './portfolio-routing.module';
@@ -23,7 +22,6 @@ import { EmpresaContatoComponent } from './empresa-contato/empresa-contato.compo
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
-
 @NgModule({
   declarations: [
     PortfolioComponent, 
@@ -37,7 +35,6 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     CommonModule,
     ReactiveFormsModule,
     PortfolioRoutingModule,
-    ModalModule.forRoot(),
     NgxMaskModule.forRoot(options),
     BoxModule, DropdownModule,
     SharedModule

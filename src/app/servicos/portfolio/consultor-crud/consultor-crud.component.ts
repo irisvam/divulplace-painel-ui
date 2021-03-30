@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
 
 import { FormBasicComponent } from 'src/app/shared/form-basic/form-basic.component';
 import { ConsultorService } from '../service/consultor.service';
@@ -25,6 +26,7 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
   unsub$ = new Subject();
   
   constructor(
+    private altService: AlertModalService,
     private formBuilder: FormBuilder,
     private cstService: ConsultorService
   ) {
@@ -114,7 +116,6 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
       }));
     }
   }
-
   
   submit() {
 
@@ -136,10 +137,12 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
       .pipe(takeUntil(this.unsub$))
       .subscribe(retorno => {
         console.log(retorno);
+        this.altService.showAlertSuccess('Serviço cadastrado com sucesso!');
         this.modal.hide();
       },
       (error: any) => {
         console.log(error);
+        this.altService.showAlertWarning('Erro ao cadastrar Serviço!');
       });
   }
 
@@ -148,10 +151,12 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
       .pipe(takeUntil(this.unsub$))
       .subscribe(retorno => {
         console.log(retorno);
+        this.altService.showAlertSuccess('Serviço atualizado com sucesso!');
         this.modal.hide();
       },
       (error: any) => {
         console.log(error);
+        this.altService.showAlertWarning('Erro ao atualizar Serviço!');
       });
   }
 

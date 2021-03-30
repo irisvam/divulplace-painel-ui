@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -26,6 +27,7 @@ import { ErrorInterceptor } from './login/_helpers/error.interceptor';
     BrowserAnimationsModule,
     AppRoutingModule,
     DashboardModule,
+    ModalModule.forRoot(),
     LayoutModule.forRoot(adminLteConf),   //Provide the configuration to the layout module.
     LoadingPageModule, MaterialBarModule
   ],

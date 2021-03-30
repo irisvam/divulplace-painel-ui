@@ -17,6 +17,7 @@ import { UsuarioPerfil } from '../service/model/usuario-perfil';
 import { FormBasicComponent } from 'src/app/shared/form-basic/form-basic.component';
 
 import * as moment from 'moment';
+import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
 
 @Component({
   selector: 'app-dados-pessoais',
@@ -35,6 +36,7 @@ export class DadosPessoaisComponent extends FormBasicComponent implements OnInit
 
   constructor(
     private formBuilder: FormBuilder,
+    private altService: AlertModalService,
     private localeService: BsLocaleService,
     private modalService: BsModalService,
     private pflService: PerfilService,
@@ -108,9 +110,11 @@ export class DadosPessoaisComponent extends FormBasicComponent implements OnInit
       .subscribe(retorno => {
         console.log(retorno);
         this.formulario.patchValue({dataNascimento: this.formulario.value['dataNascimento'].format('DD-MM-YYYY')});
+        this.altService.showAlertSuccess('Dados Pessoais atualizados com sucesso!');
       },
       (error: any) => {
         console.log(error);
+        this.altService.showAlertWarning('Erro ao tentar atualizar Dados Pessoais!');
       });
   }
 

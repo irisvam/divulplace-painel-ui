@@ -14,6 +14,7 @@ import { UsuarioContato } from '../service/model/usuario-contato';
 import { AuthenticationService } from 'src/app/login/_services/authentication.service';
 import { ContatoService } from '../service/contato.service';
 import { SocialService } from '../service/social.service';
+import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
 
 @Component({
   selector: 'app-contato',
@@ -41,6 +42,7 @@ export class ContatoComponent extends FormBasicComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private altService: AlertModalService,
     private ddwService: DropdownService,
     private cttService: ContatoService,
     private solService: SocialService,
@@ -176,7 +178,6 @@ export class ContatoComponent extends FormBasicComponent implements OnInit {
     for (let control of this.rdsRemovidos.controls) {
       (<FormArray>this.formulario.get('redesSociais')).push(control);
     }
-    console.log(JSON.stringify(this.formulario.value))
     if(null == this.formulario.value['id']){
       this.cadastrar();
     } else {
@@ -191,9 +192,11 @@ export class ContatoComponent extends FormBasicComponent implements OnInit {
         console.log(retorno);
         this.formulario.patchValue({id: retorno.id});
         this.recuperarRedesSociais();
+        this.altService.showAlertSuccess('Contatos cadastrados com sucesso!');
       },
       (error: any) => {
         console.log(error);
+        this.altService.showAlertWarning('Erro ao tentar cadastrar Contatos!');
       });
   }
 
@@ -203,9 +206,11 @@ export class ContatoComponent extends FormBasicComponent implements OnInit {
       .subscribe(retorno => {
         console.log(retorno);
         this.recuperarRedesSociais();
+        this.altService.showAlertSuccess('Contatos atualizados com sucesso!');
       },
       (error: any) => {
         console.log(error);
+        this.altService.showAlertWarning('Erro ao tentar atualizar Contatos!');
       });
   }
 
@@ -216,7 +221,6 @@ export class ContatoComponent extends FormBasicComponent implements OnInit {
     this.solService.recuperarRedesSociais(this.idUsuario)
       .pipe(takeUntil(this.unsub$))
       .subscribe(retorno => {
-        console.log(retorno);
         let lista = this.buildSociais(retorno);
         for (let control of lista.controls) {
           (<FormArray>this.formulario.get('redesSociais')).push(control);

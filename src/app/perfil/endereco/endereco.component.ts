@@ -13,6 +13,7 @@ import { Paises } from 'src/app/shared/model/paises';
 import { CidadesBr } from 'src/app/shared/model/cidades-br';
 import { EnderecoViaCep } from 'src/app/shared/model/endereco-viacep';
 import { FormBasicComponent } from 'src/app/shared/form-basic/form-basic.component';
+import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
 
 @Component({
   selector: 'app-endereco',
@@ -31,6 +32,7 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
 
   constructor(
     private formBuilder: FormBuilder,
+    private altService: AlertModalService,
     private ddwService: DropdownService,
     private endService: EnderecoService,
     private authenticationService: AuthenticationService
@@ -161,9 +163,11 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
       .subscribe(retorno => {
         console.log(retorno);
         this.formulario.patchValue({id: retorno.id});
+        this.altService.showAlertSuccess('Endereço cadastrado com sucesso!');
       },
       (error: any) => {
         console.log(error);
+        this.altService.showAlertWarning('Erro ao tentar cadastrar Endereço!');
       });
   }
 
@@ -172,9 +176,11 @@ export class EnderecoComponent extends FormBasicComponent implements OnInit, OnD
       .pipe(takeUntil(this.unsub$))
       .subscribe(retorno => {
         console.log(retorno);
+        this.altService.showAlertSuccess('Endereço atualizado com sucesso!');
       },
       (error: any) => {
         console.log(error);
+        this.altService.showAlertWarning('Erro ao tentar atualizar Endereço!');
       });
   }
 

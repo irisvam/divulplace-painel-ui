@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { first } from 'rxjs/operators';
+import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
 
 import { FormBasicComponent } from 'src/app/shared/form-basic/form-basic.component';
 import { AuthenticationService } from '../_services/authentication.service';
@@ -20,6 +22,7 @@ export class AuthComponent extends FormBasicComponent implements OnInit {
   error = '';
 
   constructor(
+    private altService: AlertModalService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -47,8 +50,6 @@ export class AuthComponent extends FormBasicComponent implements OnInit {
   submit() {
     this.submitted = true;
     this.loading = true;
-    console.log('chamar login');
-
     this.authenticationService.login(JSON.stringify(this.formulario.value))
     .pipe(first())
     .subscribe(
@@ -57,6 +58,7 @@ export class AuthComponent extends FormBasicComponent implements OnInit {
       },
       error => {
           this.error = error;
+          this.altService.showAlertDanger('Usuário ou senha Inválidos!');
           this.loading = false;
       });
   }
