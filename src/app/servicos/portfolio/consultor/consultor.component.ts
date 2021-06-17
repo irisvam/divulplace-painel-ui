@@ -1,8 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { empty, Observable, Subject } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { EMPTY, Observable, Subject } from 'rxjs';
+import { catchError, switchMap, take } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/login/_services/authentication.service';
 import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
 import { ConsultorService } from '../service/consultor.service';
@@ -16,8 +16,6 @@ import { ServicoConsultor } from '../service/model/servico-consultor';
 export class ConsultorComponent implements OnInit {
 
   modalServico: BsModalRef;
-  deleteModal: BsModalRef;
-  @ViewChild('tpltDeleteModal') tpltDeleteModal;
   idUsuario: number;
   idSelecionado = 0;
   servicos$: Observable<ServicoConsultor[]>;
@@ -42,7 +40,7 @@ export class ConsultorComponent implements OnInit {
       catchError(error => {
         console.log(error);
         this.altService.showAlertDanger('Erro ao carregar serviços!');
-        return empty();
+        return EMPTY;
       })
     );
   }
@@ -56,30 +54,20 @@ export class ConsultorComponent implements OnInit {
   }
 
   onDelete(id : number) {
-    this.idSelecionado = id;
-    this.deleteModal = this.mdlService.show(
-      this.tpltDeleteModal,
-      Object.assign({}, { class: 'gray modal-sm' })
-    );
-  }
-
-  onConfirmeDelete(){
-    this.cstService.deletarServico(this.idSelecionado)
-    .subscribe(
-      success => {
-        this.onRefresh();
-        this.deleteModal.hide();
-        this.altService.showAlertSuccess('Serviço deletado com sucesso!');
-      },
-      error => {
-        this.deleteModal.hide();
-        this.altService.showAlertWarning('Erro ao tentar deletar Serviço!');
-      }
-    );
-  }
-
-  onDeclineDelete(){
-    this.deleteModal.hide();
+    const result$ = this.altService.showConfirm('Confirmar','Deseja deletar o Serviço?');
+    result$.asObservable()
+      .pipe(
+        take(1),
+        switchMap(result => result ? this.cstService.deletarServico(id) : EMPTY)
+      ).subscribe(
+        success => {
+          this.onRefresh();
+          this.altService.showAlertSuccess('Serviço deletado com sucesso!');
+        },
+        error => {
+          this.altService.showAlertWarning('Erro ao tentar deletar Serviço!');
+        }
+      );
   }
 
   ngOnDestroy() {

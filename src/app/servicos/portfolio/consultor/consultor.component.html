@@ -73,13 +73,5 @@
 </mk-box>
 
 <ng-template #tpltServico>
-    <app-consultor-crud [modal]="modalServico" [idUsuario]="idUsuario" [idServico]="idSelecionado"></app-consultor-crud>
+    <app-consultor-crud [modal]="modalServico" [idUsuario]="idUsuario" [idServico]="idSelecionado" ></app-consultor-crud>
 </ng-template>
-
-<ng-template #tpltDeleteModal>
-    <div class="modal-body text-center">
-      <p>Deseja deletar o Serviço?</p>
-      <button type="button" class="btn btn-default" (click)="onConfirmeDelete()">Sim</button>
-      <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Não</button>
-    </div>
-  </ng-template>

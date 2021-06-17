@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { EventEmitter } from 'events';
 
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
@@ -22,6 +23,9 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
   @Input() idServico: number;
   @Input() idUsuario: number;
   btnModal: String;
+
+  files: Set<File>;
+  noImages: String[];
   
   unsub$ = new Subject();
   
@@ -57,6 +61,9 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
           this.btnModal = 'Atualizar';
         });
     }
+
+    let assetsImage = "assets/img/250x250.png";
+    this.noImages = [assetsImage,assetsImage,assetsImage,assetsImage];
   }
 
   inicializarFormServico(servico: ServicoConsultor) {
@@ -114,6 +121,37 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
         nome: nomeRamo,
         situacao: true
       }));
+    }
+  }
+
+  onImageChange(event) {
+    console.log(event);
+    const selectedFiles = <FileList>event.srcElement.files;
+    this.files = new Set();
+    let conferir: boolean = true;
+    if (event.target.files && event.target.files[0]) {
+      this.noImages = [];
+      for (let index = 0; index < selectedFiles.length; index++) {
+        if(!selectedFiles.item(index).type.startsWith('image')){
+          this.altService.showAlertWarning('Arquivo \'' + selectedFiles.item(index).name + '\' não é uma Imagem!');
+          conferir = false;
+          break;
+        }
+        this.files.add(selectedFiles.item(index));
+
+        var reader = new FileReader();
+
+        reader.onload = (event:any) => {
+          this.noImages.push(event.target.result);
+        }
+
+        reader.readAsDataURL(event.target.files[index]);
+      }
+    }
+    if(conferir){
+      this.altService.showAlertSuccess('Arquivo é uma Imagem!');
+      //this.cstService.upload(this.idServico,this.files)
+      //.subscribe(result => console.log('enviado!'));
     }
   }
   

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { RetornoCadastro } from 'src/app/shared/model/retorno-cadastro';
@@ -33,6 +33,13 @@ export class ConsultorService {
 
   deletarServico(id: number){
     return this.http.delete(`${this.API}/servicos/${id}`).pipe(take(1));
+  }
+
+  upload(id: number, files: Set<File>){
+    const formData = new FormData();
+    files.forEach(file => formData.append('files', file, file.name));
+
+    return this.http.post(`${this.API}/servicos/${id}/imagens`, formData).pipe(take(1));
   }
 
 }
