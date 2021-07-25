@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, TemplateRef } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { EventEmitter } from 'events';
 
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
@@ -22,7 +22,10 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
   @Input() modal: BsModalRef;
   @Input() idServico: number;
   @Input() idUsuario: number;
+  modalImage: BsModalRef;
+
   btnModal: String;
+  icImagem: boolean;
 
   files: Set<File>;
   noImages: String[];
@@ -32,13 +35,15 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
   constructor(
     private altService: AlertModalService,
     private formBuilder: FormBuilder,
-    private cstService: ConsultorService
+    private cstService: ConsultorService,
+    private modalService: BsModalService
   ) {
     super();
   }
 
   ngOnInit() {
     document.body.style.backgroundColor = '#222d32';
+    this.icImagem = false;
 
     this.formulario = this.formBuilder.group({
       id: [null],
@@ -63,7 +68,7 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
     }
 
     let assetsImage = "assets/img/250x250.png";
-    this.noImages = [assetsImage,assetsImage,assetsImage,assetsImage];
+    this.noImages = [assetsImage,assetsImage,assetsImage];
   }
 
   inicializarFormServico(servico: ServicoConsultor) {
@@ -125,7 +130,7 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
   }
 
   onImageChange(event) {
-    console.log(event);
+    
     const selectedFiles = <FileList>event.srcElement.files;
     this.files = new Set();
     let conferir: boolean = true;
@@ -147,9 +152,10 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
 
         reader.readAsDataURL(event.target.files[index]);
       }
+      this.icImagem = true;
     }
     if(conferir){
-      this.altService.showAlertSuccess('Arquivo é uma Imagem!');
+      //this.altService.showAlertSuccess('Arquivo é uma Imagem!');
       //this.cstService.upload(this.idServico,this.files)
       //.subscribe(result => console.log('enviado!'));
     }
@@ -198,9 +204,32 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
       });
   }
 
+  openModal(tpltImagem: TemplateRef<any>) {
+    this.modalImage = this.modalService.show(
+      tpltImagem, 
+      Object.assign({}, { ignoreBackdropClick: true })
+    );
+  }
+
+  onRefresh() {
+    console.log("atualizado");
+  }
+
   ngOnDestroy() {
     this.unsub$.next();
     this.unsub$.complete();
+  }
+
+  updateUrlImagens(newItem: string[]) {
+    this.noImages = newItem;
+  }
+  updateFiles(newItem: Set<File>) {
+    this.files = newItem;
+    if (0 == this.files.size) {
+      this.noImages.push("assets/img/250x250.png");
+      this.noImages.push("assets/img/250x250.png");
+      this.icImagem = false;
+    }
   }
 
 }

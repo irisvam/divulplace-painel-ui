@@ -19,6 +19,7 @@ import { ProdutoCrudComponent } from './produto-crud/produto-crud.component';
 import { DivulgadorCrudComponent } from './divulgador-crud/divulgador-crud.component';
 import { EmpresaCrudComponent } from './empresa-crud/empresa-crud.component';
 import { EmpresaContatoComponent } from './empresa-contato/empresa-contato.component';
+import { ImageCrudComponent } from './image-crud/image-crud.component';
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -29,7 +30,7 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     ProdutoComponent, ProdutoCrudComponent, 
     EmpresaComponent, EmpresaCrudComponent, 
     DivulgadorComponent, DivulgadorCrudComponent, 
-    PessoalInfoComponent, EmpresaContatoComponent
+    PessoalInfoComponent, EmpresaContatoComponent, ImageCrudComponent
   ],
   imports: [
     CommonModule,
