@@ -12,12 +12,12 @@ import { FormBasicComponent } from 'src/app/shared/form-basic/form-basic.compone
 export class ImageCrudComponent extends FormBasicComponent implements OnInit {
 
   @Input() modal: BsModalRef;
-  @Input() imagens: Set<File>;
+  @Input() imagens: File[];
   @Input() urlImagens: String[];
   @Output() urlEvent = new EventEmitter<String[]>();
-  @Output() fileEvent = new EventEmitter<Set<File>>();
+  @Output() fileEvent = new EventEmitter<File[]>();
   
-  newImagens: Set<File> = new Set();
+  newImagens: File[] = [];
   selectedImage = 0;
   newUrlImagens: String[] = [];
 
@@ -33,11 +33,15 @@ export class ImageCrudComponent extends FormBasicComponent implements OnInit {
       id: [null]
     });
 
-    this.imagens.forEach(item => this.newImagens.add(item));
+    console.log(this.newImagens);
+    this.imagens.forEach(item => this.newImagens.push(item));
+    console.log(this.newImagens);
     
+    console.log(this.newUrlImagens);
     for (let index = 0; index < this.urlImagens.length; index++) {
       this.newUrlImagens.push(this.urlImagens[index]);
     }
+    console.log(this.newUrlImagens);
   }
   onImageChange(event) {
     const selectedFiles = <FileList>event.srcElement.files;
@@ -54,7 +58,7 @@ export class ImageCrudComponent extends FormBasicComponent implements OnInit {
           this.newUrlImagens.splice(0,1);
         }
 
-        this.newImagens.add(selectedFiles.item(index));
+        this.newImagens.push(selectedFiles.item(index));
 
         var reader = new FileReader();
 
@@ -80,18 +84,16 @@ export class ImageCrudComponent extends FormBasicComponent implements OnInit {
 
   removeImage(){
     this.newUrlImagens.splice(this.selectedImage,1);
-    this.newImagens.delete(this.newImagens[this.selectedImage]);
+    this.newImagens.splice(this.selectedImage,1);
 
     if(this.selectedImage > 0){
       this.selectedImage = this.selectedImage-1;
     } else {
       if(this.newUrlImagens.length == 0){
         this.newUrlImagens.push("assets/img/250x250.png");
-        this.newImagens = new Set();
+        this.newImagens = [];
       }
     }
-    // precisa tirar do set//
-    // precisa 
   }
 
 }

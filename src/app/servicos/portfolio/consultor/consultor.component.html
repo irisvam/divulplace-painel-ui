@@ -7,7 +7,7 @@
     </mk-box-tools>
     <mk-box-content>
         <div *ngIf="servicos$ | async as servicos; else loading">
-            <section *ngFor="let servico of servicos">
+            <section *ngFor="let servico of servicos; let i = index">
                 <mk-box [isCollapsable]="false" [isRemovable]="false">
                     <mk-box-header> {{ servico?.nomeEmpresa }} </mk-box-header>
                     <mk-box-tools>
@@ -50,8 +50,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-offset-2 col-md-8 center-image">
-                                    <iframe width="330" height="200" src="https://www.youtube.com/embed/o7TTe3FC6kY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    {{ servico?.urlVideo }}
+                                    <iframe width="330" height="200" [src]="srcVideo[i]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>
