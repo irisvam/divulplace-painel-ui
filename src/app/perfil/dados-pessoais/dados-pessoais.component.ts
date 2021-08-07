@@ -100,7 +100,10 @@ export class DadosPessoaisComponent extends FormBasicComponent implements OnInit
   }
 
   openModal(tpltMudaSenha: TemplateRef<any>) {
-    this.modalMudaSenha = this.modalService.show(tpltMudaSenha);
+    this.modalMudaSenha = this.modalService.show(
+      tpltMudaSenha,
+      Object.assign({}, { ignoreBackdropClick: true })
+    );
   }
 
   submit() {

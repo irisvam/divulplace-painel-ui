@@ -27,7 +27,7 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
   btnModal: String;
   icImagem: boolean;
 
-  files: Set<File>;
+  files: File[];
   noImages: String[];
   
   unsub$ = new Subject();
@@ -132,17 +132,15 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
   onImageChange(event) {
     
     const selectedFiles = <FileList>event.srcElement.files;
-    this.files = new Set();
-    let conferir: boolean = true;
+    this.files = [];
     if (event.target.files && event.target.files[0]) {
       this.noImages = [];
       for (let index = 0; index < selectedFiles.length; index++) {
         if(!selectedFiles.item(index).type.startsWith('image')){
           this.altService.showAlertWarning('Arquivo \'' + selectedFiles.item(index).name + '\' não é uma Imagem!');
-          conferir = false;
           break;
         }
-        this.files.add(selectedFiles.item(index));
+        this.files.push(selectedFiles.item(index));
 
         var reader = new FileReader();
 
@@ -153,11 +151,6 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
         reader.readAsDataURL(event.target.files[index]);
       }
       this.icImagem = true;
-    }
-    if(conferir){
-      //this.altService.showAlertSuccess('Arquivo é uma Imagem!');
-      //this.cstService.upload(this.idServico,this.files)
-      //.subscribe(result => console.log('enviado!'));
     }
   }
   
@@ -181,6 +174,7 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
       .pipe(takeUntil(this.unsub$))
       .subscribe(retorno => {
         console.log(retorno);
+        this.atualizarImagem(retorno.id);
         this.altService.showAlertSuccess('Serviço cadastrado com sucesso!');
         this.modal.hide();
       },
@@ -195,12 +189,24 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
       .pipe(takeUntil(this.unsub$))
       .subscribe(retorno => {
         console.log(retorno);
+        this.atualizarImagem(this.formulario.value['id']);
         this.altService.showAlertSuccess('Serviço atualizado com sucesso!');
         this.modal.hide();
       },
       (error: any) => {
         console.log(error);
         this.altService.showAlertWarning('Erro ao atualizar Serviço!');
+      });
+  }
+
+  atualizarImagem(id: number) {
+    this.cstService.upload(id,this.files)
+      .pipe(takeUntil(this.unsub$))
+      .subscribe(result => { console.log('enviado!') }
+      ,
+      (error: any) => {
+        console.log(error);
+        this.altService.showAlertWarning('Erro ao atualizar Imagens do Serviço!');
       });
   }
 
@@ -223,9 +229,9 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
   updateUrlImagens(newItem: string[]) {
     this.noImages = newItem;
   }
-  updateFiles(newItem: Set<File>) {
+  updateFiles(newItem: File[]) {
     this.files = newItem;
-    if (0 == this.files.size) {
+    if (0 == this.files.length) {
       this.noImages.push("assets/img/250x250.png");
       this.noImages.push("assets/img/250x250.png");
       this.icImagem = false;

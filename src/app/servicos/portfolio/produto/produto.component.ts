@@ -19,7 +19,10 @@ export class ProdutoComponent implements OnInit {
   }
 
   openModal(tpltProduto: TemplateRef<any>) {
-    this.modalProduto = this.modalService.show(tpltProduto);
+    this.modalProduto = this.modalService.show(
+      tpltProduto, 
+      Object.assign({}, { ignoreBackdropClick: true })
+    );
   }
 
 }

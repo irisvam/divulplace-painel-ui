@@ -21,7 +21,7 @@ export class DivulgadorComponent implements OnInit {
   openModal(tpltDivulgador: TemplateRef<any>) {
     this.modalDivulgador = this.modalService.show(
       tpltDivulgador,
-      Object.assign({}, { class: 'gray modal-lg' })
+      Object.assign({}, { ignoreBackdropClick: true, class: 'gray modal-lg' })
     );
   }
 

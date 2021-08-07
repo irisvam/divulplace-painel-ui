@@ -21,7 +21,7 @@ export class EmpresaComponent implements OnInit {
   openModal(tpltEmpresa: TemplateRef<any>) {
     this.modalEmpresa = this.modalService.show(
       tpltEmpresa,
-      Object.assign({}, { class: 'gray modal-lg' })
+      Object.assign({}, { ignoreBackdropClick: true, class: 'gray modal-lg' })
     );
   }
 
