@@ -33,15 +33,11 @@ export class ImageCrudComponent extends FormBasicComponent implements OnInit {
       id: [null]
     });
 
-    console.log(this.newImagens);
     this.imagens.forEach(item => this.newImagens.push(item));
-    console.log(this.newImagens);
-    
-    console.log(this.newUrlImagens);
+
     for (let index = 0; index < this.urlImagens.length; index++) {
       this.newUrlImagens.push(this.urlImagens[index]);
     }
-    console.log(this.newUrlImagens);
   }
   onImageChange(event) {
     const selectedFiles = <FileList>event.srcElement.files;

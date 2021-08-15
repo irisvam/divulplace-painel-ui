@@ -1,0 +1,23 @@
+<form class="form-horizontal" [formGroup]="formulario" (ngSubmit)="onSubmit()" >
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Video do Youtube</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="inputUrlVideo" class="col-sm-2 control-label">URL</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <input type="text" class="form-control" id="inputUrlVideo" placeholder="http://" formControlName="urlVideo">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" (click)="modal.hide()">Fechar</button>
+        <button type="submit" class="btn btn-primary" >Selecionar e Validar</button>
+    </div>
+</form>

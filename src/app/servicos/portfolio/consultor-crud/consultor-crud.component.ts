@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, TemplateRef } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { EventEmitter } from 'events';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -22,13 +23,14 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
   @Input() modal: BsModalRef;
   @Input() idServico: number;
   @Input() idUsuario: number;
-  modalImage: BsModalRef;
+  modalInterno: BsModalRef;
 
   btnModal: String;
   icImagem: boolean;
 
   files: File[];
   noImages: String[];
+  srcVideo: SafeResourceUrl;
   
   unsub$ = new Subject();
   
@@ -36,7 +38,8 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
     private altService: AlertModalService,
     private formBuilder: FormBuilder,
     private cstService: ConsultorService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    public sanitizer: DomSanitizer
   ) {
     super();
   }
@@ -88,6 +91,10 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
         urlEmpresa: servico.urlEmpresa,
         urlVideo: servico.urlVideo
       });
+
+      if(this.formulario.get('urlVideo').value){
+        this.srcVideo = this.sanitizer.bypassSecurityTrustResourceUrl(this.formulario.get('urlVideo').value);
+      }
 
       let lista = this.buildRamosAtividades(servico.ramoAtividades);
       for (let control of lista.controls) {
@@ -200,19 +207,21 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
   }
 
   atualizarImagem(id: number) {
-    this.cstService.upload(id,this.files)
-      .pipe(takeUntil(this.unsub$))
-      .subscribe(result => { console.log('enviado!') }
-      ,
-      (error: any) => {
-        console.log(error);
-        this.altService.showAlertWarning('Erro ao atualizar Imagens do Serviço!');
-      });
+    if(this.files){
+      this.cstService.upload(id,this.files)
+        .pipe(takeUntil(this.unsub$))
+        .subscribe(result => { console.log('enviado!') }
+        ,
+        (error: any) => {
+          console.log(error);
+          this.altService.showAlertWarning('Erro ao atualizar Imagens do Serviço!');
+        });
+    }
   }
 
-  openModal(tpltImagem: TemplateRef<any>) {
-    this.modalImage = this.modalService.show(
-      tpltImagem, 
+  openModal(tpltChamado: TemplateRef<any>) {
+    this.modalInterno = this.modalService.show(
+      tpltChamado, 
       Object.assign({}, { ignoreBackdropClick: true })
     );
   }
@@ -226,6 +235,14 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
     this.unsub$.complete();
   }
 
+  updateUrlVideo(newItem: string) {
+    this.formulario.get('urlVideo').setValue(newItem);
+    console.log(" Url recebida : "+ newItem);
+    if(newItem){
+      console.log(newItem);
+      this.srcVideo = this.sanitizer.bypassSecurityTrustResourceUrl(newItem);
+    }
+  }
   updateUrlImagens(newItem: string[]) {
     this.noImages = newItem;
   }

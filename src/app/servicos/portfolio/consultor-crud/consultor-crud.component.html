@@ -81,16 +81,15 @@
         <div class="row">
             <div class="col-md-offset-3 col-md-6 text-center">
                 <div class="form-group">
-                    <div class="btn btn-default btn-file">
+                    <div class="btn btn-default btn-file" (click)="openModal(tpltVideo)">
                         <i class="fa fa-youtube-play"></i> Apontar Vídeo
                     </div>
                 </div>
-                <!-- <div class="form-group">
+                <div class="form-group" *ngIf="formulario.value.urlVideo">
                     <div class="col-md-12">
-                        <img class="img-responsive" src="assets/img/750x450.png">
+                        <iframe width="330" height="200" [src]="srcVideo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
-                -->
             </div>
         </div>
     </div>
@@ -101,6 +100,10 @@
 </form>
 
 <ng-template #tpltImagem>
-    <app-image-crud [modal]="modalImage" [imagens]="files" [urlImagens]="noImages" 
+    <app-image-crud [modal]="modalInterno" [imagens]="files" [urlImagens]="noImages" 
         (fileEvent)="updateFiles($event)" (urlEvent)="updateUrlImagens($event)"></app-image-crud>
+</ng-template>
+
+<ng-template #tpltVideo>
+    <app-consultor-video [modal]="modalInterno" [urlVideo]="formulario.get('urlVideo').value" (urlVideoEvent)="updateUrlVideo($event)"></app-consultor-video>
 </ng-template>
