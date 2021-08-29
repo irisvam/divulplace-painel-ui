@@ -237,12 +237,11 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
 
   updateUrlVideo(newItem: string) {
     this.formulario.get('urlVideo').setValue(newItem);
-    console.log(" Url recebida : "+ newItem);
     if(newItem){
-      console.log(newItem);
       this.srcVideo = this.sanitizer.bypassSecurityTrustResourceUrl(newItem);
     }
   }
+  
   updateUrlImagens(newItem: string[]) {
     this.noImages = newItem;
   }
