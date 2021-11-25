@@ -1,13 +1,84 @@
 <mk-box boxColor="info" [isCollapsable]="true" [isRemovable]="false" buttonsStyleClass="btn btn-info btn-sm">
     <mk-box-header>Produtos <small>Itens que você quer divulgar</small></mk-box-header>
     <mk-box-tools>
-        <button class="btn btn-info btn-sm" (click)="openModal(tpltProduto)" style="margin-right: 5px;">
+        <button class="btn btn-info btn-sm" (click)="openModal(tpltProduto, 0)" style="margin-right: 5px;">
             <i class="fa fa-file-o"></i> 
         </button>
     </mk-box-tools>
-    <mk-box-content>HTML Box content</mk-box-content>
+    <mk-box-content>
+        <div *ngIf="produtos$ | async as produtos; else loading">
+            <section *ngFor="let produto of produtos; let i = index">
+                <div *ngIf="produto?.tpoModelo == 'PADRAO'">
+                    <div class="row">
+                        <div class="col-md-3 center-image text-center">
+                            <img class="img-responsive" src="assets/img/250x250.png">
+                        </div>
+                        <div class="col-md-9">
+                            <mk-box [isCollapsable]="false" [isRemovable]="false">
+                                <mk-box-header> {{ produto?.nomeProduto }} </mk-box-header>
+                                <mk-box-tools>
+                                    <button class="btn btn-box-tool btn-sm" title="Alterar" (click)="openModal(tpltProduto, produto?.id)" style="margin-right: 5px;">
+                                        <i class="fa fa-pencil-square-o fa-2x"></i> 
+                                    </button>
+                                    <button class="btn btn-box-tool btn-sm" title="Excluir" (click)="onDelete(produto?.id)" style="margin-right: 5px;">
+                                        <i class="fa fa-trash-o fa-2x"></i> 
+                                    </button>
+                                </mk-box-tools>
+                                <mk-box-content>
+                                    <p class="recuo">
+                                        {{ produto?.descricao }}
+                                    </p>
+                                </mk-box-content>
+                            </mk-box>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <br/>
+                            <a href="{{ produto?.urlProduto }}" target="_blank" alt="">{{ produto?.urlProduto }}</a>
+                            <hr/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div *ngFor="let produto of produtos; let i = index">
+                <div *ngIf="produto?.tpoModelo == 'VITRINE'">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                        <section>
+                            <div class="row">
+                                <div class="col-xs-10 center-image text-center">
+                                    <img class="img-responsive" src="assets/img/250x250.png">
+                                </div>
+                                <button class="btn btn-box-tool btn-sm" title="Alterar" (click)="openModal(tpltProduto, produto?.id)" style="margin-right: 5px;">
+                                    <i class="fa fa-pencil-square-o fa-2x"></i> 
+                                </button>
+                                <button class="btn btn-box-tool btn-sm" title="Excluir" (click)="onDelete(produto?.id)" style="margin-right: 5px;">
+                                    <i class="fa fa-trash-o fa-2x"></i> 
+                                </button>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-10 text-center">
+                                    {{ produto?.nomeProduto }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <br/>
+                                    <a href="{{ produto?.urlProduto }}" target="_blank" alt="">saiba mais</a>
+                                    <hr/>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #loading>
+            <span>Carregando Produtos...</span>
+        </ng-template>
+    </mk-box-content>
 </mk-box>
 
 <ng-template #tpltProduto>
-    <app-produto-crud [modal]="modalProduto"></app-produto-crud>
+    <app-produto-crud [modal]="modalProduto" [idUsuario]="idUsuario" [idProduto]="idSelecionado" ></app-produto-crud>
 </ng-template>

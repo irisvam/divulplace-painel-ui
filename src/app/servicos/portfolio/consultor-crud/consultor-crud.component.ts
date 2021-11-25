@@ -245,6 +245,7 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
   updateUrlImagens(newItem: string[]) {
     this.noImages = newItem;
   }
+
   updateFiles(newItem: File[]) {
     this.files = newItem;
     if (0 == this.files.length) {
