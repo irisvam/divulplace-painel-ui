@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, Output, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, TemplateRef } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { EventEmitter } from 'events';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
@@ -23,6 +22,7 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
   @Input() modal: BsModalRef;
   @Input() idServico: number;
   @Input() idUsuario: number;
+  @Output() modalConsultorEvent = new EventEmitter<boolean>();
   modalInterno: BsModalRef;
 
   btnModal: String;
@@ -182,8 +182,7 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
       .subscribe(retorno => {
         console.log(retorno);
         this.atualizarImagem(retorno.id);
-        this.altService.showAlertSuccess('Serviço cadastrado com sucesso!');
-        this.modal.hide();
+        this.finalizarModal('Serviço cadastrado com sucesso!');
       },
       (error: any) => {
         console.log(error);
@@ -197,8 +196,7 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
       .subscribe(retorno => {
         console.log(retorno);
         this.atualizarImagem(this.formulario.value['id']);
-        this.altService.showAlertSuccess('Serviço atualizado com sucesso!');
-        this.modal.hide();
+        this.finalizarModal('Serviço atualizado com sucesso!');
       },
       (error: any) => {
         console.log(error);
@@ -217,6 +215,12 @@ export class ConsultorCrudComponent extends FormBasicComponent implements OnInit
           this.altService.showAlertWarning('Erro ao atualizar Imagens do Serviço!');
         });
     }
+  }
+
+  finalizarModal(msg: string){
+    this.altService.showAlertSuccess(msg);
+    this.modalConsultorEvent.emit(true);
+    this.modal.hide();
   }
 
   openModal(tpltChamado: TemplateRef<any>) {

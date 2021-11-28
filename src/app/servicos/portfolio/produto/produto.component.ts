@@ -69,4 +69,10 @@ export class ProdutoComponent implements OnInit {
       );
   }
 
+  updateListaProduto(icAltualizar: boolean){
+    if(icAltualizar){
+      this.onRefresh();
+    }
+  }
+
 }

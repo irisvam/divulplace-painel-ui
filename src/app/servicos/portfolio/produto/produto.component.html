@@ -43,7 +43,7 @@
             </section>
             <div *ngFor="let produto of produtos; let i = index">
                 <div *ngIf="produto?.tpoModelo == 'VITRINE'">
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6" style="height: 320px;">
                         <section>
                             <div class="row">
                                 <div class="col-xs-10 center-image text-center">
@@ -80,5 +80,5 @@
 </mk-box>
 
 <ng-template #tpltProduto>
-    <app-produto-crud [modal]="modalProduto" [idUsuario]="idUsuario" [idProduto]="idSelecionado" ></app-produto-crud>
+    <app-produto-crud [modal]="modalProduto" [idUsuario]="idUsuario" [idProduto]="idSelecionado" (modalProdutoEvent)="updateListaProduto($event)" ></app-produto-crud>
 </ng-template>

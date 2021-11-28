@@ -72,5 +72,5 @@
 </mk-box>
 
 <ng-template #tpltServico>
-    <app-consultor-crud [modal]="modalServico" [idUsuario]="idUsuario" [idServico]="idSelecionado" ></app-consultor-crud>
+    <app-consultor-crud [modal]="modalServico" [idUsuario]="idUsuario" [idServico]="idSelecionado" (modalConsultorEvent)="updateListaConsultor($event)" ></app-consultor-crud>
 </ng-template>

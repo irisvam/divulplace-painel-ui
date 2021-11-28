@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, TemplateRef, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -20,6 +20,7 @@ export class ProdutoCrudComponent extends FormBasicComponent implements OnInit {
   @Input() modal: BsModalRef;
   @Input() idProduto: number;
   @Input() idUsuario: number;
+  @Output() modalProdutoEvent = new EventEmitter<boolean>();
   modalInterno: BsModalRef;
 
   icModeloPadrao: boolean;
@@ -150,8 +151,7 @@ export class ProdutoCrudComponent extends FormBasicComponent implements OnInit {
       .subscribe(retorno => {
         console.log(retorno);
         this.atualizarImagem(retorno.id);
-        this.altService.showAlertSuccess('Produto cadastrado com sucesso!');
-        this.modal.hide();
+        this.finalizarModal('Produto cadastrado com sucesso!');
       },
       (error: any) => {
         console.log(error);
@@ -165,8 +165,7 @@ export class ProdutoCrudComponent extends FormBasicComponent implements OnInit {
       .subscribe(retorno => {
         console.log(retorno);
         this.atualizarImagem(this.formulario.value['id']);
-        this.altService.showAlertSuccess('Produto atualizado com sucesso!');
-        this.modal.hide();
+        this.finalizarModal('Produto atualizado com sucesso!');
       },
       (error: any) => {
         console.log(error);
@@ -185,6 +184,12 @@ export class ProdutoCrudComponent extends FormBasicComponent implements OnInit {
           this.altService.showAlertWarning('Erro ao atualizar Imagens do Produto!');
         });
     }
+  }
+
+  finalizarModal(msg: string){
+    this.altService.showAlertSuccess(msg);
+    this.modalProdutoEvent.emit(true);
+    this.modal.hide();
   }
 
   ngOnDestroy() {

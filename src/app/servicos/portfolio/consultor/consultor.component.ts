@@ -83,6 +83,12 @@ export class ConsultorComponent implements OnInit {
       );
   }
 
+  updateListaConsultor(icAltualizar: boolean) {
+    if(icAltualizar){
+      this.onRefresh();
+    }
+  }
+
   ngOnDestroy() {
 
   }
