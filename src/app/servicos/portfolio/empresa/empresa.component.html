@@ -1,13 +1,79 @@
 <mk-box boxColor="info" [isCollapsable]="true" [isRemovable]="false" buttonsStyleClass="btn btn-info btn-sm">
     <mk-box-header>Empresas <small>Suas empresas</small></mk-box-header>
     <mk-box-tools>
-        <button class="btn btn-info btn-sm" (click)="openModal(tpltEmpresa)" style="margin-right: 5px;">
+        <button class="btn btn-info btn-sm" (click)="openModal(tpltEmpresa, 0)" style="margin-right: 5px;">
             <i class="fa fa-file-o"></i> 
         </button>
     </mk-box-tools>
-    <mk-box-content>HTML Box content</mk-box-content>
+    <mk-box-content>
+        <div *ngIf="empresas$ | async as empresas; else loading">
+            <section *ngFor="let empresa of empresas; let i = index">
+                <mk-box [isCollapsable]="false" [isRemovable]="false">
+                    <mk-box-header> {{ empresa?.nomeEmpresa }} </mk-box-header>
+                    <mk-box-tools>
+                        <button class="btn btn-box-tool btn-sm" title="Alterar" (click)="openModal(tpltEmpresa, empresa?.id)" style="margin-right: 5px;">
+                            <i class="fa fa-pencil-square-o fa-2x"></i> 
+                        </button>
+                        <button class="btn btn-box-tool btn-sm" title="Excluir" (click)="onDelete(empresa?.id)" style="margin-right: 5px;">
+                            <i class="fa fa-trash-o fa-2x"></i> 
+                        </button>
+                    </mk-box-tools>
+                    <mk-box-content>
+                        <div class="row">
+                            <div class="col-md-3 center-image text-center">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img class="img-responsive" src="assets/img/250x250.png">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="col-md-12">
+                                    <div style="display: table; height: 150px;">
+                                        <div style="display: table-cell; vertical-align: middle;">
+                                            <p class="recuo">
+                                                {{ empresa?.descricao }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-offset-2 col-md-8 center-image">
+                                    <iframe width="330" height="200" [src]="srcVideo[i]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <br/>
+                                <span class="label label-success" *ngFor="let ramo of empresa?.ramoAtividades">
+                                    {{ ramo?.nome }}
+                                </span>
+                                <br/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <p><i class="fa fa-map-marker"></i> {{ empresa?.endereco?.logradouro }}, {{ empresa?.endereco?.numero }} - {{ empresa?.endereco?.bairro }} - {{ empresa?.endereco?.cidade }} - {{ empresa?.endereco?.estado }}</p>
+                                <p>Contatos: <i class="fa fa-phone"></i> {{ empresa?.contato?.telefone }} || <i class="fa fa-whatsapp"></i> {{ empresa?.contato?.celular01 }} || <i class="fa fa-whatsapp"></i> {{ empresa?.contato?.celular02 }} || <i class="fa fa-envelope-o"></i> {{ empresa?.contato?.email }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <br/>
+                                <a href="{{ empresa?.urlEmpresa }}" target="_blank" alt="">{{ empresa?.urlEmpresa }}</a>
+                                <hr/>
+                            </div>
+                        </div>
+                    </mk-box-content>
+                </mk-box>
+            </section>
+        </div>
+        <ng-template #loading>
+            <span>Carregando Empresas...</span>
+        </ng-template>
+    </mk-box-content>
 </mk-box>
 
-<ng-template #tpltEmpresa>
+<ng-template #tpltEmpresa [idUsuario]="idUsuario" [idEmpresa]="idSelecionado" (modalEmpresaEvent)="updateListaEmpresas($event)">
     <app-empresa-crud [modal]="modalEmpresa"></app-empresa-crud>
 </ng-template>

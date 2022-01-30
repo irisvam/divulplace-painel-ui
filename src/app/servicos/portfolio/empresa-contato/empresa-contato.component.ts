@@ -22,6 +22,8 @@ import { EnderecoViaCep } from 'src/app/shared/model/endereco-viacep';
 export class EmpresaContatoComponent extends FormBasicComponent implements OnInit {
 
   @Input() modal: BsModalRef;
+  @Input() idEndereco: number;
+  @Input() idUsuario: number;
 
   paises: Observable<Paises[]>;
   estados: EstadosBr[];
