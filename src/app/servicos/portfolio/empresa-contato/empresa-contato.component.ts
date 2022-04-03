@@ -13,6 +13,8 @@ import { EstadosBr } from 'src/app/shared/model/estados-br';
 import { CidadesBr } from 'src/app/shared/model/cidades-br';
 import { tap, switchMap, map, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { EnderecoViaCep } from 'src/app/shared/model/endereco-viacep';
+import { EmpresaEndereco } from '../service/model/empresa-endereco';
+import { EmpresaContato } from '../service/model/empresa-contato';
 
 @Component({
   selector: 'app-empresa-contato',
@@ -48,9 +50,9 @@ export class EmpresaContatoComponent extends FormBasicComponent implements OnIni
       numero: [null],
       complemento: [null],
       bairro: [null],
-      estado: ['', Validators.required],
-      cidadeId: ['', Validators.required],
-      cidade: ['', Validators.required],
+      estado: [''],
+      cidadeId: [null],
+      cidade: [''],
       telefone: [null],
       celular01: [null],
       celular01WS: [false],
@@ -90,6 +92,37 @@ export class EmpresaContatoComponent extends FormBasicComponent implements OnIni
         takeUntil(this.unsub$)
       )
       .subscribe(retorno => retorno.cep ? this.atualizarEndereco(retorno) : {});
+  }
+
+  inicializarFormEndereco(endereco: EmpresaEndereco) {
+    if (endereco) {
+      this.formulario.patchValue({
+        id: endereco.id,
+        pais: endereco.pais,
+        cep: endereco.cep,
+        logradouro: endereco.logradouro,
+        numero: endereco.numero,
+        complemento: endereco.complemento,
+        bairro: endereco.bairro,
+        estado: endereco.estado,
+        cidadeId: endereco.cidadeId,
+        cidade: endereco.cidade
+      });
+    }
+  }
+
+  inicializarFormContato(contato: EmpresaContato) {
+    if (contato) {
+      this.formulario.patchValue({
+        id: contato.id,
+        telefone: contato.telefone,
+        celular01: contato.celular01,
+        celular01WS: contato.celular01WS,
+        celular02: contato.celular02,
+        celular02WS: contato.celular02WS,
+        email: contato.email
+      });
+    }
   }
 
   atualizarEndereco(endereco: EnderecoViaCep){
