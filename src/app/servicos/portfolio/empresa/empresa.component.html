@@ -9,7 +9,7 @@
         <div *ngIf="empresas$ | async as empresas; else loading">
             <section *ngFor="let empresa of empresas; let i = index">
                 <mk-box [isCollapsable]="false" [isRemovable]="false">
-                    <mk-box-header> {{ empresa?.nomeEmpresa }} </mk-box-header>
+                    <mk-box-header> {{ empresa?.nomeEmpresa }} <small>{{ empresa?.cnpj }}</small> </mk-box-header>
                     <mk-box-tools>
                         <button class="btn btn-box-tool btn-sm" title="Alterar" (click)="openModal(tpltEmpresa, empresa?.id)" style="margin-right: 5px;">
                             <i class="fa fa-pencil-square-o fa-2x"></i> 
@@ -74,6 +74,6 @@
     </mk-box-content>
 </mk-box>
 
-<ng-template #tpltEmpresa [idUsuario]="idUsuario" [idEmpresa]="idSelecionado" (modalEmpresaEvent)="updateListaEmpresas($event)">
-    <app-empresa-crud [modal]="modalEmpresa"></app-empresa-crud>
+<ng-template #tpltEmpresa >
+    <app-empresa-crud [modal]="modalEmpresa" [idUsuario]="idUsuario" [idEmpresa]="idSelecionado" (modalEmpresaEvent)="updateListaEmpresas($event)"></app-empresa-crud>
 </ng-template>

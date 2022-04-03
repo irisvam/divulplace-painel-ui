@@ -5,6 +5,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AuthenticationService } from 'src/app/login/_services/authentication.service';
 import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
 
 import { FormBasicComponent } from 'src/app/shared/form-basic/form-basic.component';
@@ -40,12 +41,14 @@ export class EmpresaCrudComponent extends FormBasicComponent implements OnInit {
     private modalService: BsModalService,
     private formBuilder: FormBuilder,
     private empService: EmpresaService,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private authenticationService: AuthenticationService
   ) {
     super();
   }
 
   ngOnInit() {
+    this.idUsuario = this.authenticationService.currentUserValue.id;
     this.icImagem = false;
 
     this.formulario = this.formBuilder.group({
@@ -84,6 +87,7 @@ export class EmpresaCrudComponent extends FormBasicComponent implements OnInit {
       }
       this.formulario.patchValue({
         id: empresa.id,
+        cnpj: empresa.cnpj,
         nomeEmpresa: empresa.nomeEmpresa,
         descricao: empresa.descricao,
         ramo: ramosDeAtividades,
